@@ -1,0 +1,73 @@
+---
+import Wrapper from "../../Wrapper.astro";
+import { Image, Picture } from "astro:assets";
+import "./introCircleImage.scss";
+
+import backgroundImage from "../../../../assets/intro-background.png";
+
+const { data } = Astro.props;
+---
+
+<div class="intro-circle">
+  <Wrapper classes="intro-circle-wrapper">
+    <div class="intro-circle-title">
+      <h1>{data.title}</h1>
+      <div set:html={data.content} />
+    </div>
+    <div class="intro-circle-image">
+      <Picture
+        src={data.image.node.sourceUrl}
+        alt={data.image.node.altText}
+        width={data.image.node.mediaDetails.width}
+        height={data.image.node.mediaDetails.height}
+        formats={["avif", "webp"]}
+      />
+    </div>
+  </Wrapper>
+  <div class="intro-circle-background">
+    <Image
+      src={backgroundImage}
+      alt="backround graphic"
+      width={4098}
+      height={1140}
+    />
+  </div>
+</div>
+
+<script>
+  import { gsap } from "gsap";
+
+  const imgContainer = document.querySelector(".intro-circle-image");
+  const tl = gsap.timeline();
+  const imgTl = gsap.timeline({ delay: 0.1 });
+
+  imgTl.fromTo(
+    imgContainer,
+    { scale: 1.1, filter: "blur(5px)" },
+    { duration: 1, scale: 1, ease: "power2.inOut", filter: "blur(0px)" },
+  );
+
+  tl.add("start")
+    .fromTo(
+      ".intro-circle-title h1",
+      { autoAlpha: 0, y: 200 },
+      {
+        duration: 1,
+        autoAlpha: 1,
+        y: 0,
+        ease: "power2.out",
+      },
+      "start+=0.5",
+    )
+    .fromTo(
+      ".intro-circle-title p",
+      { autoAlpha: 0, x: -200 },
+      {
+        duration: 1,
+        autoAlpha: 1,
+        x: 0,
+        ease: "power2.out",
+      },
+      "start+=1",
+    );
+</script>

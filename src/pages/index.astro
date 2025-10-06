@@ -1,9 +1,47 @@
 ---
+import Button from "../components/shared/Button.astro";
+import Headline from "../components/shared/Headline.astro";
+import Paragraph from "../components/shared/Paragraph.astro";
+import Wrapper from "../components/shared/Wrapper.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-  <div>
-    <h1>Home</h1>
-  </div>
+  <Wrapper>
+    <div>
+      <Headline ele="h1" hlstyle="one"
+        >Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</Headline
+      >
+      <Headline ele="h1" hlstyle="two"
+        >Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</Headline
+      >
+      <Headline ele="h1" hlstyle="three"
+        >Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</Headline
+      >
+      <Headline ele="h1" hlstyle="four"
+        >Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</Headline
+      >
+
+      <Paragraph ele="p" pstyle="one"
+        >Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae
+        luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing,
+        commodo quis, gravida id, est. Sed lectus. Praesent elementum hendrerit
+        tortor. Sed semper lorem at felis. Vestibulum volutpat, lacus a ultrices
+        sagittis, mi neque euismod dui, eu pulvinar nunc sapien ornare nisl.
+        Phasellus pede arcu, dapibus eu, fermentum et, dapibus sed, urna.</Paragraph
+      >
+      <Paragraph ele="p" pstyle="two"
+        >Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae
+        luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing,
+        commodo quis, gravida id, est. Sed lectus. Praesent elementum hendrerit
+        tortor. Sed semper lorem at felis. Vestibulum volutpat, lacus a ultrices
+        sagittis, mi neque euismod dui, eu pulvinar nunc sapien ornare nisl.
+        Phasellus pede arcu, dapibus eu, fermentum et, dapibus sed, urna.</Paragraph
+      >
+
+      <Button ele="button" btnstyle="one">Our Services</Button>
+      <Button ele="a" btnstyle="two">Our Services</Button>
+      <Button ele="button" btnstyle="two">Our Services</Button>
+    </div>
+  </Wrapper>
 </Layout>

@@ -1,0 +1,59 @@
+---
+import { Picture } from "astro:assets";
+import Wrapper from "../../../shared/Wrapper.astro";
+import Headline from "../../../shared/Headline.astro";
+import Button from "../../../shared/Button.astro";
+import Wysiwyg from "../../../shared/Wysiwyg.astro";
+
+import "./programs.scss";
+
+const { data } = Astro.props;
+---
+
+<div class="programs">
+  <Wrapper classes="programs-wrapper">
+    {
+      data.programs.map((program: any) => {
+        return (
+          <div class="programs-program">
+            <div class="programs-program-image">
+              <Picture
+                src={program.image.node.sourceUrl}
+                alt={program.image.node.altText}
+                width={program.image.node.mediaDetails.width}
+                height={program.image.node.mediaDetails.height}
+                formats={["avif", "webp"]}
+              />
+            </div>
+            <div class="programs-program-title">
+              <Headline ele="h2" hlstyle="two">
+                {program.title}
+              </Headline>
+            </div>
+            <Wysiwyg classes="programs-program-content">
+              <div set:html={program.content} />
+            </Wysiwyg>
+            {program.buttonRequired ? (
+              <div class="programs-program-button">
+                {program.buttonType[0] === "internal" ? (
+                  <Button ele="a" href={program.internalLink.edges[0].node.uri}>
+                    {program.buttonText}
+                  </Button>
+                ) : (
+                  <Button
+                    targte="_blank"
+                    rel="noopen"
+                    ele="a"
+                    href={program.externalUrl}
+                  >
+                    {program.buttonText}
+                  </Button>
+                )}
+              </div>
+            ) : null}
+          </div>
+        );
+      })
+    }
+  </Wrapper>
+</div>

@@ -1,0 +1,45 @@
+---
+import { Image } from "astro:assets";
+import Wrapper from "../../../shared/Wrapper.astro";
+import Headline from "../../../shared/Headline.astro";
+import "./linkCards.scss";
+
+const { data } = Astro.props;
+---
+
+<div class="link-cards">
+  <Wrapper classes="link-cards-wrapper">
+    <div class="link-cards-title">
+      <Headline ele="h2" hlstyle="two">{data.title}</Headline>
+    </div>
+    {
+      data.card.map((card: any) => {
+        return (
+          <div
+            class={`link-cards-card link-cards-card-${card.backgroundColour}`}
+          >
+            <div class="link-cards-card-icon">
+              <div class="link-cards-card-icon-inner">
+                <Image
+                  src={card.icon.node.sourceUrl}
+                  alt={card.icon.node.altText}
+                  width={card.icon.node.mediaDetails.width}
+                  height={card.icon.node.mediaDetails.height}
+                />
+              </div>
+            </div>
+            <div class="link-cards-card-title">
+              <Headline ele="h2" hlstyle="four">
+                {card.title}
+              </Headline>
+            </div>
+            <div class="link-cards-card-content" set:html={card.content} />
+            <div class="link-cards-card-link">
+              <a href={card.buttonLink.edges[0].node.uri}>{card.buttonText}</a>
+            </div>
+          </div>
+        );
+      })
+    }
+  </Wrapper>
+</div>

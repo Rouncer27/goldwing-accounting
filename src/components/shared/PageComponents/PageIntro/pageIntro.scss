@@ -1,0 +1,73 @@
+@use "../../../../styles/abstracts/" as *;
+@use "../../../../styles/global/headlines";
+@use "../../../../styles/global/paragraphs";
+
+.page-intro {
+  position: relative;
+  padding-top: 10rem;
+
+  @media (min-width: 768px) {
+    padding-top: 30rem;
+  }
+
+  &-content {
+    width: calc(100%);
+
+    @media (min-width: 768px) {
+      width: calc(60%);
+      max-width: 80rem;
+      margin-right: auto;
+      margin-left: 0;
+      padding-right: 2rem;
+    }
+
+    @media (min-width: 1025px) {
+      width: calc(85% - 5rem);
+      margin-left: 5rem;
+      padding-left: 2rem;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    h2 {
+      margin: 0;
+      margin-bottom: 4rem;
+      color: $tertiaryColor;
+    }
+
+    p {
+      @extend .p-one;
+    }
+  }
+
+  &-icon {
+    width: calc(100%);
+    max-width: 15rem;
+    margin-right: auto;
+    margin-bottom: 2.5rem;
+    margin-left: 0;
+
+    @media (min-width: 768px) {
+      width: calc(40%);
+      max-width: 100%;
+      margin-right: 0;
+      margin-bottom: 0;
+      padding: 0 2.5rem;
+    }
+
+    @media (min-width: 1025px) {
+      width: calc(15%);
+    }
+  }
+
+  &-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+}

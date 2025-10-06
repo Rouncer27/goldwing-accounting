@@ -1,0 +1,48 @@
+@use "../../../../styles/abstracts/" as *;
+@use "../../../../styles/global/wrappers";
+@use "../../../../styles/global/headlines";
+@use "../../../../styles/global/paragraphs";
+
+.testimonials-slider {
+  padding: 4rem;
+
+  &-wrapper {
+    @extend .wrap-med;
+    max-width: 100rem !important;
+  }
+
+  &-title {
+    width: 100%;
+    text-align: center;
+
+    h2 {
+      @extend .hl-two;
+      color: $primaryColor;
+      text-transform: uppercase;
+    }
+  }
+
+  &-slider {
+    width: 100%;
+
+    .slick-dots {
+      li {
+        button {
+          &::before {
+            border-radius: 50%;
+            background-color: $primaryColor;
+            content: "";
+          }
+        }
+      }
+    }
+  }
+
+  &-slide {
+    p {
+      @extend .p-one;
+      color: $shadowColor;
+      text-align: center;
+    }
+  }
+}

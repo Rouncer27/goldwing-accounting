@@ -1,0 +1,79 @@
+@use "../../../../styles/global/headlines";
+
+.intro-circle {
+  position: relative;
+  padding-top: 10rem;
+  padding-bottom: 5rem;
+
+  @media (min-width: 768px) {
+    padding-top: 8rem;
+    padding-bottom: 0;
+  }
+
+  &-title {
+    width: calc(100%);
+
+    @media (min-width: 768px) {
+      width: calc(60%);
+      max-width: 77rem;
+      margin-right: auto;
+      margin-left: 0;
+      padding-top: 10rem;
+      padding-right: 2rem;
+    }
+
+    @media (min-width: 1025px) {
+      width: calc(70%);
+      max-width: 77rem;
+      padding-right: 2rem;
+      padding-top: 11vw;
+    }
+
+    h1 {
+      @extend .hl-four;
+      margin: 0;
+      margin-bottom: 3rem;
+      text-transform: uppercase;
+    }
+
+    p {
+      @extend .hl-two;
+    }
+  }
+
+  &-image {
+    width: calc(100%);
+    margin-left: 0;
+    margin-right: auto;
+
+    @media (min-width: 768px) {
+      width: calc(40%);
+      margin-right: 0;
+      padding: 0 2.5rem;
+    }
+
+    @media (min-width: 1025px) {
+      width: calc(30%);
+    }
+
+    img {
+      max-width: 20rem;
+      margin-left: 0;
+      margin-right: auto;
+
+      @media (min-width: 768px) {
+        max-width: 32rem;
+        margin-right: 0;
+      }
+    }
+  }
+
+  &-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+}
