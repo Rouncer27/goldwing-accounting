@@ -1,0 +1,76 @@
+@use "../abstracts" as *;
+@use "../utils";
+
+.btn {
+  @include utils.font-sizer(1.6, 1.8, 76.8, 150, 1.8);
+  position: relative;
+  display: inline-block;
+  padding: 1rem 3rem;
+  transition: all 0.3s ease;
+  border: 0.1rem solid $secondaryColor;
+  border-radius: 2.5rem;
+  background-color: $secondaryColor;
+  color: $whiteColor;
+  font-family: $primaryFont;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.3;
+  letter-spacing: normal;
+  text-align: center;
+  outline: none;
+  text-transform: uppercase;
+
+  &:focus {
+    transition: all 0.35s ease-in-out;
+  }
+
+  &:hover {
+    cursor: pointer;
+    color: $whiteColor;
+    background-color: $primaryColor;
+    border-color: $primaryColor;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    &:hover {
+      color: $whiteColor;
+      background-color: $primaryColor;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.btn-one {
+  @extend .btn;
+  color: $whiteColor;
+}
+
+.btn-two {
+  @extend .btn;
+  background-color: $shadowColor;
+  border-color: $shadowColor;
+  color: $whiteColor;
+
+  &:hover {
+    background-color: $accentColor;
+    border-color: $accentColor;
+    color: $whiteColor;
+  }
+}
+
+.btn-three {
+  @extend .btn;
+  background-color: $tertiaryColor;
+  border-color: $tertiaryColor;
+  color: $whiteColor;
+
+  &:hover {
+    background-color: $secondaryColor;
+    border-color: $secondaryColor;
+    color: $whiteColor;
+  }
+}
