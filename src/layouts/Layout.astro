@@ -1,4 +1,5 @@
 ---
+// 1️⃣ Imports
 // Import Components
 import Header from "./Header.astro";
 import Footer from "./Footer.astro";
@@ -10,16 +11,28 @@ import "../styles/styles.scss";
 // Import data
 import { baseData } from "../data/siteData";
 
+// What SEO data was passed via Astro.props
 const {
   metaImg = null,
   metaTitle = null,
   metaDescription = null,
 } = Astro.props;
-
+// 2️⃣ SEO fallback data
 const title = metaTitle ? metaTitle : baseData.title;
 const description = metaDescription ? metaDescription : baseData.description;
 const imgSrc = metaImg ? metaImg : baseData.siteImg;
 const baseUrl = Astro.url ? Astro.url : baseData.url;
+
+// 3️⃣ Schema.org data (Organization)
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: baseData.organizationName || baseData.title,
+  url: baseData.url,
+  logo: baseData.logoUrl, // 👈 Store this in baseData.js for reusability
+  sameAs: baseData.socialProfiles || [], // optional: Twitter, Facebook, etc.
+};
+const jsonLd = JSON.stringify(schema);
 ---
 
 <!doctype html>
@@ -56,6 +69,8 @@ const baseUrl = Astro.url ? Astro.url : baseData.url;
     <meta name="twitter:image" content={imgSrc} />
     <meta name="twitter:image:alt" content={description} />
     <meta name="twitter:creator" content={"Rocky View Foundation"} />
+
+    <script type="application/ld+json" is:inline set:html={jsonLd} />
   </head>
   <body>
     <Header />

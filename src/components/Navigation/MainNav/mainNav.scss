@@ -1,0 +1,147 @@
+@use "../../../styles/global/paragraphs";
+@use "../../../styles/global/buttons";
+@use "../../../styles/abstracts/" as *;
+
+.main-nav {
+  width: 100%;
+  margin-top: 5rem;
+
+  @media (min-width: 768px) {
+    margin-top: 0;
+  }
+
+  @media (min-width: 1025px) {
+    margin-top: 0;
+  }
+
+  nav {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    .main-nav-top-list {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+
+      @media (min-width: 768px) {
+        padding-left: 0rem;
+      }
+
+      @media (min-width: 1025px) {
+        padding-left: 0;
+      }
+
+      li {
+        position: relative;
+        margin: 0 1rem;
+
+        @media (min-width: 1150px) {
+          margin: 0 2rem;
+        }
+
+        a {
+          @extend .p-two;
+          display: inline-block;
+          padding: 1.5rem 0.5rem;
+          border-bottom: 0.2rem solid transparent;
+          color: $blackColor;
+          text-transform: uppercase;
+
+          @media (min-width: 1150px) {
+            padding: 1.5rem;
+          }
+
+          &:hover {
+            color: $tertiaryColor;
+            border-bottom-color: $tertiaryColor;
+          }
+        }
+
+        a.main-nav-current {
+          color: $primaryColor;
+          font-weight: bold;
+          border-bottom-color: $primaryColor;
+
+          &:hover {
+            cursor: default;
+          }
+        }
+
+        .main-nav-sub-menu {
+          position: absolute;
+          top: calc(100% + 0.1rem);
+          left: 0;
+          width: 25rem;
+          padding: 1rem;
+          background-color: rgba($accentColor, 0.7);
+          transition: all 0.3s ease-in-out;
+          opacity: 0;
+          visibility: hidden;
+          z-index: 100;
+
+          &.main-nav-sub-menu-active {
+            opacity: 1;
+            visibility: visible;
+          }
+
+          li {
+            margin: 0;
+            text-align: center;
+
+            a {
+              @extend .p-two;
+              padding: 0.5rem 0;
+              border-bottom: 0.2rem solid transparent;
+              font-weight: 500;
+              color: $whiteColor;
+
+              &:hover {
+                color: $secondaryColor;
+              }
+            }
+
+            a.main-nav-sub-current {
+              color: $secondaryColor;
+              border-bottom-color: $secondaryColor;
+
+              &:hover {
+                cursor: default;
+              }
+            }
+          }
+        }
+      }
+
+      li.call-to-action {
+        margin-right: 0;
+        a {
+          @extend .btn-two;
+          min-width: 20rem;
+          padding-top: 1.55rem;
+          padding-bottom: 1.55rem;
+          border-radius: 0;
+
+          &.main-nav-current {
+            color: $whiteColor;
+            background-color: $secondaryColor;
+            border-bottom-color: transparent;
+          }
+        }
+      }
+
+      li.call-to-action-two {
+        margin-right: 0;
+
+        a {
+          @extend .btn-one;
+          min-width: 20rem;
+          padding-top: 1.55rem;
+          padding-bottom: 1.55rem;
+          border-radius: 0;
+        }
+      }
+    }
+  }
+}
