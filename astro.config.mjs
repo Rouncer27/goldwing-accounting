@@ -12,4 +12,8 @@ export default defineConfig({
   },
 
   integrations: [react()],
+  image: {
+    domains: ["goldwing.swbdatabases3.com/"],
+    remotePatterns: [{ protocol: "https" }],
+  },
 });
