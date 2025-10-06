@@ -14,8 +14,13 @@
     "@types/react": "^19.2.1",
     "@types/react-dom": "^19.2.0",
     "astro": "^5.14.1",
+    "axios": "^1.12.2",
+    "gsap": "^3.13.0",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "react-slick": "^0.31.0",
+    "react-spinners": "^0.17.0",
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "prettier": "^3.6.2",
