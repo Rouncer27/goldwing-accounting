@@ -1,0 +1,16 @@
+---
+import { Picture } from "astro:assets";
+import "./mainLogo.scss";
+---
+
+<div class="main-logo">
+  <div class="main-logo-wrapper">
+    <Picture
+      src={Astro.props.data.mainLogo.node.sourceUrl}
+      alt={Astro.props.data.mainLogo.node.altText}
+      width={Astro.props.data.mainLogo.node.mediaDetails.width}
+      height={Astro.props.data.mainLogo.node.mediaDetails.height}
+      formats={["avif", "webp"]}
+    />
+  </div>
+</div>

@@ -1,0 +1,12 @@
+---
+import InstagramLink from "./InstagramLink.astro";
+import FacebookLink from "./FacebookLink.astro";
+import "./socialMediaLinks.scss";
+---
+
+<div class="social-media">
+  <ul class="social-media-links">
+    <FacebookLink link={Astro.props.data.facebookLink} />
+    <InstagramLink link={Astro.props.data.instagramLink} />
+  </ul>
+</div>

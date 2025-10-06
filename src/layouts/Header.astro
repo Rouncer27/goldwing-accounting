@@ -1,6 +1,18 @@
 ---
+import { getOptimizedImages } from "../utils/helperFunctions";
+
 import MainNav from "../components/Navigation/MainNav/MainNav";
-import { Header_Menu_Query } from "../data/header/queries";
+import MobileNav from "../components/Navigation/MobileNav/MobileNav";
+import MainLogo from "../components/Logos/MainLogo.astro";
+
+import "./header.scss";
+
+import {
+  Header_Menu_Query,
+  Mobile_Menu_Query,
+  Logo_Options_Query,
+  Social_Media_Links_Query,
+} from "../data/header/queries";
 
 const response = await fetch(`${import.meta.env.PUBLIC_WP_URL}/graphql`, {
   method: "POST",
@@ -11,6 +23,9 @@ const response = await fetch(`${import.meta.env.PUBLIC_WP_URL}/graphql`, {
     query: `
         query headerQuery {
           ${Header_Menu_Query}
+          ${Mobile_Menu_Query}
+             ${Logo_Options_Query}
+          ${Social_Media_Links_Query}
         }
     `,
   }),
@@ -18,16 +33,52 @@ const response = await fetch(`${import.meta.env.PUBLIC_WP_URL}/graphql`, {
 const {
   data: {
     menuTop: { menuItems: menuTopMenuItems },
+    mobile: { menuItems: mobile },
+    mainLogo: { logoOptions },
+    socialMediaLinks,
   },
 } = await response.json();
+
+// Optimize Logo for Mobile Menu built in React. //
+const optimizedLogo = await getOptimizedImages(
+  logoOptions.mainLogo.node.sourceUrl,
+);
+
+const newLogoOptions = {
+  mainLogo: {
+    node: {
+      sourceUrl: optimizedLogo.src,
+      altText: logoOptions.mainLogo.node.altText,
+    },
+  },
+};
 ---
 
-<div>
-  <div>
-    <MainNav
+<header class="main-header">
+  <div class="main-header-wrapper">
+    <div class="main-header-logo">
+      <h1>
+        <a href="/">
+          <MainLogo data={logoOptions} />
+        </a>
+        <span>Goldwing Accounting</span>
+      </h1>
+    </div>
+    <div class="main-header-navigation">
+      <MainNav
+        client:only="react"
+        menuItems={menuTopMenuItems.nodes}
+        pathname={Astro.url.pathname}
+      />
+    </div>
+  </div>
+  <div class="main-header-mobile">
+    <MobileNav
       client:only="react"
-      menuItems={menuTopMenuItems.nodes}
+      mainMenu={mobile}
+      mainLogo={newLogoOptions}
+      socialMedia={socialMediaLinks}
       pathname={Astro.url.pathname}
     />
   </div>
-</div>
+</header>
