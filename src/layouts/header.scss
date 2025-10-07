@@ -1,7 +1,11 @@
 @use "../styles/abstracts/" as *;
 
 .main-header {
-  position: relative;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 99999999999;
 
   &-wrapper {
     display: flex;
@@ -16,34 +20,19 @@
     height: 15rem;
     padding: 0;
     margin-bottom: 2.5rem;
-    background-color: $whiteColor;
-    border-radius: 50%;
     overflow: hidden;
 
     @media (min-width: 1025px) {
-      position: absolute;
-      top: 2.25rem;
-      left: -0.75rem;
-      margin-bottom: 0;
-      padding: 1rem;
       width: 12rem;
       height: 12rem;
     }
 
     @media (min-width: 1150px) {
-      position: absolute;
-      top: 2.25rem;
-      left: -0.75rem;
-      padding: 1rem;
       width: 12rem;
       height: 12rem;
     }
 
     @media (min-width: 1250px) {
-      position: absolute;
-      top: -2.5rem;
-      left: -2.5rem;
-      padding: 4rem;
       width: 22.5rem;
       height: 22.5rem;
     }
@@ -70,36 +59,7 @@
 
     @media (min-width: 768px) {
       display: flex;
-      width: calc(100%);
-    }
-
-    &-top {
-      width: 100%;
-
-      .main-nav {
-        .main-nav-top {
-          justify-content: flex-end;
-        }
-      }
-    }
-
-    &-bottom {
-      width: 100%;
-      background-color: $accentColor;
-
-      .main-nav {
-        .main-nav-top {
-          justify-content: flex-end;
-
-          .main-nav-top-list {
-            li {
-              a {
-                color: $whiteColor;
-              }
-            }
-          }
-        }
-      }
+      width: calc(100% - 22.5rem);
     }
   }
 
