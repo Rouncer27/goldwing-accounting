@@ -1,0 +1,32 @@
+---
+import { Image } from "astro:assets";
+import "./pageHeroSmall.scss";
+import Wrapper from "../shared/Wrapper.astro";
+import Headline from "../shared/Headline.astro";
+
+const { data } = Astro.props;
+const { title, image } = data;
+
+const heroImage = image?.node?.sourceUrl;
+const heroAlt = image?.node?.altText || "Hero image";
+---
+
+<div class="page-hero-small">
+  <div class="page-hero-small__media">
+    <Image
+      src={heroImage}
+      alt={heroAlt}
+      format="webp"
+      widths={[800, 1200, 1600, 2000]}
+      sizes="100vw"
+      loading="eager"
+      inferSize={true}
+      class="page-hero-small__img"
+    />
+  </div>
+  <Wrapper classes={`page-hero-small__content`}>
+    <div class="page-hero-small__title">
+      <Headline ele="h1" hlstyle="one" set:html={title} />
+    </div>
+  </Wrapper>
+</div>

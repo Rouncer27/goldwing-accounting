@@ -27,3 +27,19 @@ export const Page_Hero_Query = `
         }
     }
 `;
+
+export const Page_Hero_Small_Query = `
+    pageHeroSmall: pageHeroSmallComponent {
+        title
+        image {
+            node {
+                sourceUrl
+                altText
+                mediaDetails {
+                    width
+                    height
+                }
+            }
+        }
+    }
+`;

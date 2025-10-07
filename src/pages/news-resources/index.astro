@@ -1,0 +1,40 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import PageHeroSmall from "../../components/PageHeroSmall/PageHeroSmall.astro";
+
+import { Page_Seo_Query } from "../../data/page/queries";
+import { Page_Hero_Small_Query } from "../../data/shared/queries";
+
+const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
+  method: "POST",
+  headers: {
+    "content-type": "application/json",
+  },
+  body: JSON.stringify({
+    query: `
+		query newsResourcesQuery {
+			page(id: "/news-resources", idType: URI) {
+				${Page_Seo_Query}
+        newsResourcesPage {
+          ${Page_Hero_Small_Query}
+        }
+			}
+		}
+	`,
+  }),
+});
+
+const {
+  data: {
+    page: { seoMetaTags, newsResourcesPage },
+  },
+} = await response.json();
+---
+
+<Layout
+  metaImg={seoMetaTags.seoMetaInformation.metaImage.sourceUrl}
+  metaTitle={seoMetaTags.seoMetaInformation.metaTitle}
+  metaDescription={seoMetaTags.seoMetaInformation.metaDescription}
+>
+  <PageHeroSmall data={newsResourcesPage.pageHeroSmall} />
+</Layout>
