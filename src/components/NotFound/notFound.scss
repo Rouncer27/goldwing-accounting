@@ -1,0 +1,29 @@
+@use "../../styles/global/buttons";
+@use "../../styles/global/paragraphs";
+@use "../../styles/global/headlines";
+
+.not-found-main {
+  &-title {
+    width: 100%;
+    text-align: center;
+    padding-top: 5vh;
+
+    h2 {
+      @extend .hl-one;
+    }
+  }
+
+  &-content {
+    width: 100%;
+    text-align: center;
+    padding-bottom: 5vh;
+
+    p {
+      @extend .p-one;
+    }
+
+    a {
+      @extend .btn-one;
+    }
+  }
+}

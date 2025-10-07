@@ -1,9 +1,33 @@
 ---
+import PageHeroSmall from "../components/PageHeroSmall/PageHeroSmall.astro";
+import { Default_Page_Hero_Query } from "../data/page/queries";
 import Layout from "../layouts/Layout.astro";
+import NotFound from "../components/NotFound/NotFound.astro";
+
+const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
+  method: "POST",
+  headers: {
+    "content-type": "application/json",
+  },
+  body: JSON.stringify({
+    query: `
+		query notFoundPageQuery {
+			 ${Default_Page_Hero_Query}
+		}
+	`,
+  }),
+});
+
+const {
+  data: {
+    siteWideSettings: {
+      defaultHeader: { defaultPageHero },
+    },
+  },
+} = await response.json();
 ---
 
 <Layout>
-  <div>
-    <h1>404 - Page Not Found</h1>
-  </div>
+  <PageHeroSmall data={{ image: defaultPageHero, title: "Page Not Found" }} />
+  <NotFound />
 </Layout>
