@@ -1,9 +1,39 @@
 ---
+// @ts-nocheck
+import type { GetStaticPaths } from "astro";
 import Layout from "../../layouts/Layout.astro";
 import PageHeroSmall from "../../components/PageHeroSmall/PageHeroSmall.astro";
+import PostCards from "../../components/PostCards/PostCards.astro";
 
 import { Page_Seo_Query } from "../../data/page/queries";
 import { Page_Hero_Small_Query } from "../../data/shared/queries";
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      query: `
+        query postsQuery {
+          posts(first: 999999) {
+            edges {
+              node {
+                slug
+                title
+              }
+            }
+          }
+        }
+      `,
+    }),
+  });
+
+  const { data } = await response.json();
+  const allposts = data.posts.edges;
+  return paginate(allposts, { pageSize: 3 });
+};
 
 const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
   method: "POST",
@@ -29,6 +59,11 @@ const {
     page: { seoMetaTags, newsResourcesPage },
   },
 } = await response.json();
+
+const {
+  page,
+  page: { data: allPosts },
+} = Astro.props;
 ---
 
 <Layout
@@ -37,4 +72,5 @@ const {
   metaDescription={seoMetaTags.seoMetaInformation.metaDescription}
 >
   <PageHeroSmall data={newsResourcesPage.pageHeroSmall} />
+  <PostCards allPosts={allPosts} />
 </Layout>

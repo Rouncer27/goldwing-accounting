@@ -1,0 +1,8 @@
+---
+import "./card.scss";
+const { post } = Astro.props;
+---
+
+<div class="post-card">
+  <h1><a href={`/news-resources/${post.slug}`}>{post.title}</a></h1>
+</div>

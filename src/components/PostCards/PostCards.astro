@@ -1,0 +1,18 @@
+---
+// @ts-nocheck
+import Wrapper from "../shared/Wrapper.astro";
+import Card from "./Card/Card.astro";
+import "./postCards.scss";
+
+const { allPosts } = Astro.props;
+---
+
+<div>
+  <Wrapper>
+    {
+      allPosts.map((post) => {
+        return <Card post={post.node} />;
+      })
+    }
+  </Wrapper>
+</div>
