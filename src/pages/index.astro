@@ -1,9 +1,9 @@
 ---
-import Headline from "../components/shared/Headline.astro";
-import Wrapper from "../components/shared/Wrapper.astro";
 import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero/PageHero.astro";
 
 import { Page_Seo_Query } from "../data/page/queries";
+import { Page_Hero_Query } from "../data/home/queries";
 
 const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
   method: "POST",
@@ -15,6 +15,9 @@ const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
 		query homePageQuery {
 			page(id: "/", idType: URI) {
 				${Page_Seo_Query}
+        homePage {
+          ${Page_Hero_Query}
+        }
 			}
 		}
 	`,
@@ -23,7 +26,7 @@ const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
 
 const {
   data: {
-    page: { seoMetaTags },
+    page: { seoMetaTags, homePage },
   },
 } = await response.json();
 ---
@@ -33,9 +36,5 @@ const {
   metaTitle={seoMetaTags.seoMetaInformation.metaTitle}
   metaDescription={seoMetaTags.seoMetaInformation.metaDescription}
 >
-  <Wrapper>
-    <div>
-      <Headline ele="h1" hlstyle="one">Home Page</Headline>
-    </div>
-  </Wrapper>
+  <PageHero data={homePage.pageHero} />
 </Layout>

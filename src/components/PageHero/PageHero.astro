@@ -1,0 +1,81 @@
+---
+import { Image } from "astro:assets";
+import "./pageHero.scss";
+import Button from "../shared/Button.astro";
+import Headline from "../shared/Headline.astro";
+import Wrapper from "../shared/Wrapper.astro";
+
+const { data } = Astro.props;
+const {
+  mainTitle,
+  contentRequired,
+  content,
+  button,
+  buttonText,
+  buttonType,
+  buttonLink,
+  buttonUrl,
+  image,
+} = data;
+
+// 1️⃣ Handle button link logic
+// If buttonType = "internal", use internal link (via buttonLink)
+// If buttonType = "external", use buttonUrl
+let linkHref = "#";
+
+if (button && buttonType?.includes("internal") && buttonLink?.edges?.length) {
+  linkHref = buttonLink.edges[0].node.uri;
+} else if (button && buttonType?.includes("external") && buttonUrl) {
+  linkHref = buttonUrl;
+}
+
+// ✅ Handle image optimization through Astro
+// You can adjust format priorities and placeholder style
+const heroImage = image?.node?.sourceUrl;
+const heroAlt = image?.node?.altText || "Hero image";
+---
+
+<section class="page-hero">
+  <div class="page-hero__media">
+    <Image
+      src={heroImage}
+      alt={heroAlt}
+      format="webp"
+      widths={[800, 1200, 1600, 2000]}
+      sizes="100vw"
+      loading="eager"
+      inferSize={true}
+      class="page-hero__img"
+    />
+  </div>
+
+  <Wrapper classes="page-hero__content">
+    <div class="page-hero__title">
+      <Headline ele="h1" hlstyle="one">{mainTitle}</Headline>
+    </div>
+
+    {
+      contentRequired && content && (
+        <div class="page-hero__text" set:html={content} />
+      )
+    }
+
+    {
+      button && linkHref && (
+        <div class="page-hero__button">
+          <Button
+            ele="a"
+            href={linkHref}
+            rel={
+              buttonType?.includes("external")
+                ? "noopener noreferrer"
+                : undefined
+            }
+          >
+            {buttonText}
+          </Button>
+        </div>
+      )
+    }
+  </Wrapper>
+</section>
