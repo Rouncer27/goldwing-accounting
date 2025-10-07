@@ -1,9 +1,40 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero/PageHero.astro";
+
+import { Page_Seo_Query } from "../data/page/queries";
+import { Page_Hero_Query } from "../data/shared/queries";
+
+const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
+  method: "POST",
+  headers: {
+    "content-type": "application/json",
+  },
+  body: JSON.stringify({
+    query: `
+		query homePageQuery {
+			page(id: "/our-services", idType: URI) {
+				${Page_Seo_Query}
+        servicesPage {
+          ${Page_Hero_Query}
+        }
+			}
+		}
+	`,
+  }),
+});
+
+const {
+  data: {
+    page: { seoMetaTags, servicesPage },
+  },
+} = await response.json();
 ---
 
-<Layout>
-  <div>
-    <h1>Our Services</h1>
-  </div>
+<Layout
+  metaImg={seoMetaTags.seoMetaInformation.metaImage.sourceUrl}
+  metaTitle={seoMetaTags.seoMetaInformation.metaTitle}
+  metaDescription={seoMetaTags.seoMetaInformation.metaDescription}
+>
+  <PageHero data={servicesPage.pageHero} />
 </Layout>
