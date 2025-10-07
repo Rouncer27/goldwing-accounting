@@ -16,12 +16,15 @@
 
   .wrapper {
     @extend .wrap-med;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
   }
 
   .menu-logo {
     width: 100%;
-    max-width: 12.5rem;
-    margin: 1rem auto;
+    width: 16.2rem;
+    height: 17.7rem;
+    margin: 0 auto 1rem;
     background-color: $whiteColor;
   }
 
