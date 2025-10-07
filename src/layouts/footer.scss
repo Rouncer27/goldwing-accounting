@@ -2,4 +2,43 @@
 
 .main-footer {
   background-color: $blackColor;
+
+  &-wrapper {
+    align-items: center;
+  }
+
+  &-social {
+    width: calc(100%);
+
+    @media (min-width: 768px) {
+      width: calc(20%);
+    }
+  }
+
+  &-nav {
+    width: calc(100%);
+
+    @media (min-width: 768px) {
+      width: calc(50% - 7.5rem);
+      margin-right: 7.5rem;
+    }
+  }
+
+  &-logo {
+    display: flex;
+    align-items: center;
+    width: calc(100%);
+
+    @media (min-width: 768px) {
+      width: calc(30%);
+    }
+
+    &__cta {
+      width: calc(50%);
+    }
+
+    &__container {
+      width: calc(50%);
+    }
+  }
 }

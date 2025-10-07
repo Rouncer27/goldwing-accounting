@@ -10,6 +10,7 @@ import {
   Social_Media_Links_Query,
 } from "../data/footer/queries";
 import "./footer.scss";
+import Button from "../components/shared/Button.astro";
 
 const response = await fetch(`${import.meta.env.PUBLIC_WP_URL}/graphql`, {
   method: "POST",
@@ -36,9 +37,20 @@ const {
 ---
 
 <footer class="main-footer">
-  <Wrapper>
-    <SocialMediaLinks data={socialMediaLinks} />
-    <FooterNav items={footerMenu.menuItems.nodes} />
-    <FooterLogo data={logoOptions} />
+  <Wrapper classes="main-footer-wrapper">
+    <div class="main-footer-social">
+      <SocialMediaLinks data={socialMediaLinks} />
+    </div>
+    <div class="main-footer-nav">
+      <FooterNav items={footerMenu.menuItems.nodes} />
+    </div>
+    <div class="main-footer-logo">
+      <div class="main-footer-logo-cta">
+        <Button>Get Started</Button>
+      </div>
+      <div class="main-footer-logo__container">
+        <FooterLogo data={logoOptions} />
+      </div>
+    </div>
   </Wrapper>
 </footer>
