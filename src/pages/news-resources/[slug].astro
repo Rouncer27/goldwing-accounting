@@ -1,0 +1,89 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import PageHeroSmall from "../../components/PageHeroSmall/PageHeroSmall.astro";
+
+import {
+  Default_Page_Hero_Query,
+  Page_Seo_Query,
+} from "../../data/page/queries";
+
+export async function getStaticPaths() {
+  const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      query: `
+        query postsQuery {
+            posts(first: 999999) {
+                nodes {
+                    uri
+                    slug
+                    title
+                }   
+            }
+        }
+        `,
+    }),
+  });
+
+  const { data } = await response.json();
+  return data.posts.nodes.map((post: any, index: any) => {
+    return {
+      params: { slug: `${post.slug}` },
+      props: {
+        next: index === 0 ? null : data.posts.nodes[index - 1],
+        prev:
+          index === data.posts.nodes.length - 1
+            ? null
+            : data.posts.nodes[index + 1],
+      },
+    };
+  });
+}
+
+const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
+  method: "POST",
+  headers: {
+    "content-type": "application/json",
+  },
+  body: JSON.stringify({
+    query: `
+    query postQuery($id: ID!) {
+      post(idType: SLUG, id: $id) {
+        ${Page_Seo_Query}
+        title
+        date
+      }
+
+      ${Default_Page_Hero_Query}
+    }
+    `,
+    variables: {
+      id: Astro.params["slug"],
+    },
+  }),
+});
+
+const {
+  data: {
+    siteWideSettings: {
+      defaultHeader: { defaultPageHero },
+    },
+    post,
+    post: { seoMetaTags },
+  },
+} = await response.json();
+---
+
+<Layout
+  metaImg={seoMetaTags.seoMetaInformation.metaImage.sourceUrl}
+  metaTitle={seoMetaTags.seoMetaInformation.metaTitle}
+  metaDescription={seoMetaTags.seoMetaInformation.metaDescription}
+>
+  <PageHeroSmall data={{ image: defaultPageHero, title: "News & Resources" }} />
+  <div>
+    <h1>Post: {post.title}</h1>
+  </div>
+</Layout>
