@@ -8,33 +8,31 @@
   z-index: 99999999999;
 
   &-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
   }
 
   &-logo {
     position: relative;
-    width: 15rem;
-    height: 15rem;
+    width: 16.2rem;
+    height: 17.7rem;
     padding: 0;
     margin-bottom: 2.5rem;
     overflow: hidden;
 
     @media (min-width: 1025px) {
-      width: 12rem;
-      height: 12rem;
+      width: 16.2rem;
+      height: 17.7rem;
     }
 
     @media (min-width: 1150px) {
-      width: 12rem;
-      height: 12rem;
+      width: 16.2rem;
+      height: 17.7rem;
     }
 
     @media (min-width: 1250px) {
-      width: 22.5rem;
-      height: 22.5rem;
+      width: 16.2rem;
+      height: 17.7rem;
     }
 
     a {

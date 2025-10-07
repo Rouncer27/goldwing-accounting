@@ -13,6 +13,7 @@ import {
   Logo_Options_Query,
   Social_Media_Links_Query,
 } from "../data/header/queries";
+import Wrapper from "../components/shared/Wrapper.astro";
 
 const response = await fetch(`${import.meta.env.PUBLIC_WP_URL}/graphql`, {
   method: "POST",
@@ -55,7 +56,7 @@ const newLogoOptions = {
 ---
 
 <header class="main-header">
-  <div class="main-header-wrapper">
+  <Wrapper classes="main-header-wrapper">
     <div class="main-header-logo">
       <h1>
         <a href="/">
@@ -71,7 +72,7 @@ const newLogoOptions = {
         pathname={Astro.url.pathname}
       />
     </div>
-  </div>
+  </Wrapper>
   <div class="main-header-mobile">
     <MobileNav
       client:only="react"
