@@ -1,5 +1,6 @@
 export const Page_Hero_Query = `
     pageHero: pageHeroComponent {
+        centreContent
         mainTitle
         contentRequired
         content
