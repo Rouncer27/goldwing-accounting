@@ -1,0 +1,39 @@
+---
+import Wrapper from "../shared/Wrapper.astro";
+import "./latestArticle.scss";
+
+const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
+  method: "POST",
+  headers: {
+    "content-type": "application/json",
+  },
+  body: JSON.stringify({
+    query: `
+        query postsQuery {
+            posts(first: 1) {
+                nodes {
+                    uri
+                    slug
+                    title
+                }   
+            }
+        }
+        `,
+  }),
+});
+
+const { data } = await response.json();
+const post = data.posts.nodes[0];
+---
+
+<div>
+  <Wrapper>
+    <div></div>
+    <div>
+      <h2>News + Resources</h2>
+    </div>
+    <div>
+      <h3>{post.title}</h3>
+    </div>
+  </Wrapper>
+</div>

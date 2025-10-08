@@ -82,3 +82,9 @@ export const Services_Query = `
         }
     }
 `;
+
+export const Latest_Article_Query = `
+   	latestArticle: latestArticleComponent {
+       displayLatestArticle
+    }
+`;
