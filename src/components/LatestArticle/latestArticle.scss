@@ -1,0 +1,38 @@
+@use "../../styles/abstracts/" as *;
+@use "../../styles/global/headlines";
+@use "../../styles/global/paragraphs";
+
+.latest-news {
+  margin: 6rem auto;
+
+  &-image {
+    width: 30%;
+  }
+
+  &-content {
+    width: calc(70% - 4rem);
+    margin-left: 4rem;
+
+    &-banner {
+      margin-bottom: 4rem;
+
+      h2 {
+        margin-bottom: 0;
+        color: $secondaryColor;
+        font-weight: 600;
+      }
+    }
+
+    &-title {
+      h3 {
+        color: $secondaryColor;
+      }
+    }
+
+    &-excerpt {
+      p {
+        @extend .p-one;
+      }
+    }
+  }
+}

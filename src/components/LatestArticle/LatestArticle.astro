@@ -1,6 +1,9 @@
 ---
+import { Image } from "astro:assets";
 import Wrapper from "../shared/Wrapper.astro";
 import "./latestArticle.scss";
+import Button from "../shared/Button.astro";
+import Headline from "../shared/Headline.astro";
 
 const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
   method: "POST",
@@ -15,6 +18,19 @@ const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
                     uri
                     slug
                     title
+                    postFields {
+                        excerpt
+                        featuredImage  {
+                            node {
+                                sourceUrl
+                                altText
+                                mediaDetails {
+                                    width
+                                    height
+                                }
+                            }
+                        }      
+                    }
                 }   
             }
         }
@@ -24,16 +40,40 @@ const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
 
 const { data } = await response.json();
 const post = data.posts.nodes[0];
+
+const featuredImageSrc = post.postFields.featuredImage?.node?.sourceUrl;
+const featuredImageAlt = post.postFields.featuredImage?.node?.altText || "";
 ---
 
-<div>
+<div class="latest-news">
   <Wrapper>
-    <div></div>
-    <div>
-      <h2>News + Resources</h2>
+    <div class="latest-news-image">
+      <Image
+        src={featuredImageSrc}
+        alt={featuredImageAlt}
+        format="webp"
+        widths={[800, 1200, 1600, 2000]}
+        sizes="100vw"
+        loading="eager"
+        inferSize={true}
+      />
     </div>
-    <div>
-      <h3>{post.title}</h3>
+    <div class="latest-news-content">
+      <div class="latest-news-content-banner">
+        <Headline ele="h2" hlstyle="three">News + Resources</Headline>
+      </div>
+      <div class="latest-news-content-title">
+        <Headline ele="h3" hlstyle="four">{post.title}</Headline>
+      </div>
+      <div
+        class="latest-news-content-excerpt"
+        set:html={post.postFields.excerpt}
+      />
+      <div class="latest-news-content-link">
+        <Button ele="a" btnstyle="two" href={`/news-resources/${post.slug}`}
+          >Read More</Button
+        >
+      </div>
     </div>
   </Wrapper>
 </div>
