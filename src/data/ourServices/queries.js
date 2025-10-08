@@ -17,3 +17,25 @@ export const Icon_Items_Query = `
         }
     }
 `;
+
+export const Steps_Query = `
+   	 steps: stepsComponent {
+        howtoworktitle
+        stepOneBold
+        stepOneContent
+        stepTwoBold
+        stepTwoContent
+        stepThreeBold
+        stepThreeContent
+        buttonText
+        buttonType
+        buttonLink {
+            edges {
+                node {
+                    uri
+                }
+            }
+        }
+        buttonUrl
+    }
+`;

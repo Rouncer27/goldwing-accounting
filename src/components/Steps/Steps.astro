@@ -1,0 +1,87 @@
+---
+import "./steps.scss";
+
+import wideBrushSwatch from "../../assets/wide-brush-swatch.png";
+import Button from "../shared/Button.astro";
+
+const {
+  howtoworktitle,
+  stepOneBold,
+  stepOneContent,
+  stepTwoBold,
+  stepTwoContent,
+  stepThreeBold,
+  stepThreeContent,
+  buttonText,
+  buttonType,
+  buttonLink,
+  buttonUrl,
+} = Astro.props.data;
+
+let linkHref = "#";
+
+if (buttonType?.includes("internal") && buttonLink?.edges?.length) {
+  linkHref = buttonLink.edges[0].node.uri;
+} else if (buttonType?.includes("external") && buttonUrl) {
+  linkHref = buttonUrl;
+}
+---
+
+<div class="services">
+  <div class="services-work">
+    <div class="services-work-container">
+      <div class="services-work-title">
+        <h2>{howtoworktitle}</h2>
+      </div>
+      <div class="services-work-steps">
+        <div class="services-work-steps-step step-one">
+          <div class="services-work-steps-step-number">
+            <p>Step 1</p>
+          </div>
+          <div class="services-work-steps-step-content">
+            <p>{stepOneBold}</p>
+            <p>{stepOneContent}</p>
+          </div>
+        </div>
+        <div class="services-work-steps-step step-two">
+          <div class="services-work-steps-step-number">
+            <p>Step 2</p>
+          </div>
+          <div class="services-work-steps-step-content">
+            <p>{stepTwoBold}</p>
+            <p>{stepTwoContent}</p>
+          </div>
+        </div>
+        <div class="services-work-steps-step step-three">
+          <div class="services-work-steps-step-number">
+            <p>Step 3</p>
+          </div>
+          <div class="services-work-steps-step-content">
+            <p>{stepThreeBold}</p>
+            <p>{stepThreeContent}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {
+    linkHref && (
+      <div class="services-work-button">
+        <Button
+          ele="a"
+          btnstyle="two"
+          href={linkHref}
+          rel={
+            buttonType?.includes("external") ? "noopener noreferrer" : undefined
+          }
+        >
+          {buttonText}
+        </Button>
+      </div>
+    )
+  }
+  <div class="services-work-brush">
+    <img src={wideBrushSwatch.src} alt="" />
+  </div>
+</div>
