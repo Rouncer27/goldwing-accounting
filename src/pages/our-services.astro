@@ -1,9 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import PageHero from "../components/PageHero/PageHero.astro";
+import IconItems from "../components/IconItems/IconItems.astro";
 
 import { Page_Seo_Query } from "../data/page/queries";
 import { Page_Hero_Query } from "../data/shared/queries";
+import { Icon_Items_Query } from "../data/ourServices/queries";
 
 const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
   method: "POST",
@@ -12,11 +14,12 @@ const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
   },
   body: JSON.stringify({
     query: `
-		query homePageQuery {
+		query servicesPageQuery {
 			page(id: "/our-services", idType: URI) {
 				${Page_Seo_Query}
         servicesPage {
           ${Page_Hero_Query}
+          ${Icon_Items_Query}
         }
 			}
 		}
@@ -37,4 +40,5 @@ const {
   metaDescription={seoMetaTags.seoMetaInformation.metaDescription}
 >
   <PageHero data={servicesPage.pageHero} />
+  <IconItems data={servicesPage.iconItems} />
 </Layout>
