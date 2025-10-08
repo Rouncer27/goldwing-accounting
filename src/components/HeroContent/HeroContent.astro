@@ -1,0 +1,94 @@
+---
+import { Image } from "astro:assets";
+import Button from "../shared/Button.astro";
+import Headline from "../shared/Headline.astro";
+import Wrapper from "../shared/Wrapper.astro";
+import "./heroContent.scss";
+import angleBrush from "../../assets/angle-brush.png";
+
+const {
+  title,
+  boldContent,
+  content,
+  buttonText,
+  buttonType,
+  buttonLink,
+  buttonUrl,
+  circleImage,
+  heroImage,
+} = Astro.props.data;
+
+let linkHref = "#";
+
+if (buttonType?.includes("internal") && buttonLink?.edges?.length) {
+  linkHref = buttonLink.edges[0].node.uri;
+} else if (buttonType?.includes("external") && buttonUrl) {
+  linkHref = buttonUrl;
+}
+
+const circleImageSrc = circleImage?.node?.sourceUrl;
+const circleAlt = circleImage?.node?.altText || title;
+
+const heroImageSrc = heroImage?.node?.sourceUrl;
+const heroAlt = circleImage?.node?.altText || "";
+---
+
+<section class="hero-content">
+  <Wrapper>
+    <div class="hero-content__container">
+      <div class="hero-content__circle-img">
+        <Image
+          src={circleImageSrc}
+          alt={circleAlt}
+          format="webp"
+          widths={[800, 1200, 1600, 2000]}
+          sizes="100vw"
+          loading="eager"
+          inferSize={true}
+          class="hero-content__circle-img--main"
+        />
+      </div>
+      <div class="hero-content__title">
+        <Headline ele="h2" hlstyle="two">{title}</Headline>
+      </div>
+      <div class="hero-content__bold">
+        <Headline ele="p" hlstyle="four" set:html={boldContent} />
+      </div>
+      <div class="hero-content__main" set:html={content} />
+      {
+        linkHref && (
+          <div class="hero-content__button">
+            <Button
+              ele="a"
+              btnstyle="two"
+              href={linkHref}
+              rel={
+                buttonType?.includes("external")
+                  ? "noopener noreferrer"
+                  : undefined
+              }
+            >
+              {buttonText}
+            </Button>
+          </div>
+        )
+      }
+    </div>
+  </Wrapper>
+  <div class="hero-content__background">
+    <Image
+      src={heroImageSrc}
+      alt={heroAlt}
+      format="webp"
+      widths={[800, 1200, 1600, 2000]}
+      sizes="100vw"
+      loading="eager"
+      inferSize={true}
+      class="hero-content__background--img"
+    />
+  </div>
+  <div class="hero-content__gradient"></div>
+  <div class="hero-content__graphic">
+    <Image src={angleBrush} alt="backround graphic" width={701} height={343} />
+  </div>
+</section>
