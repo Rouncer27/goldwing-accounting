@@ -2,10 +2,11 @@
 import Layout from "../layouts/Layout.astro";
 import PageHero from "../components/PageHero/PageHero.astro";
 import HeroContent from "../components/HeroContent/HeroContent.astro";
+import Services from "../components/Services/Services.astro";
 
 import { Page_Seo_Query } from "../data/page/queries";
 import { Page_Hero_Query } from "../data/shared/queries";
-import { Hero_Content_Query } from "../data/home/queries";
+import { Hero_Content_Query, Services_Query } from "../data/home/queries";
 
 const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
   method: "POST",
@@ -20,6 +21,7 @@ const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
         homePage {
           ${Page_Hero_Query}
           ${Hero_Content_Query}
+          ${Services_Query}
         }
 			}
 		}
@@ -41,4 +43,5 @@ const {
 >
   <PageHero data={homePage.pageHero} />
   <HeroContent data={homePage.heroContent} />
+  <Services data={homePage.services} />
 </Layout>

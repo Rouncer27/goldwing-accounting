@@ -1,0 +1,30 @@
+@use "../../styles/abstracts/" as *;
+@use "../../styles/global/headlines";
+
+.services {
+  background-color: $secondaryColor;
+
+  &-intro {
+    max-width: 100rem;
+    margin: 2rem auto;
+    text-align: center;
+
+    &-title {
+      width: 100%;
+
+      h2 {
+        color: $whiteColor;
+        font-weight: 600;
+      }
+    }
+
+    &-content {
+      width: 100%;
+
+      p {
+        @extend .hl-four;
+        color: $whiteColor;
+      }
+    }
+  }
+}

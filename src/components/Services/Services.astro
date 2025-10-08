@@ -1,0 +1,114 @@
+---
+import { Image } from "astro:assets";
+import Button from "../shared/Button.astro";
+import Headline from "../shared/Headline.astro";
+import Wrapper from "../shared/Wrapper.astro";
+import "./services.scss";
+import ServiceSlider from "./ServiceSlider/ServiceSlider";
+
+const {
+  title,
+  content,
+  services,
+  howToWorkTitle,
+  stepOneBold,
+  stepOneContent,
+  stepTwoBold,
+  stepTwoContent,
+  stepThreeBold,
+  stepThreeContent,
+  buttonText,
+  buttonType,
+  buttonLink,
+  buttonUrl,
+  bottomImage,
+} = Astro.props.data;
+
+let linkHref = "#";
+
+if (buttonType?.includes("internal") && buttonLink?.edges?.length) {
+  linkHref = buttonLink.edges[0].node.uri;
+} else if (buttonType?.includes("external") && buttonUrl) {
+  linkHref = buttonUrl;
+}
+
+const bottomImageSrc = bottomImage?.node?.sourceUrl;
+const bottomImageAlt = bottomImage?.node?.altText || "";
+---
+
+<div class="services">
+  <Wrapper>
+    <div class="services-intro">
+      <div class="services-intro-title">
+        <Headline ele="h2" hlstyle="two">{title}</Headline>
+      </div>
+      <div class="services-intro-content" set:html={content} />
+    </div>
+  </Wrapper>
+  <ServiceSlider client:only="react" services={services} />
+  <div class="services-work">
+    <div class="services-work-title">
+      <h2>{howToWorkTitle}</h2>
+    </div>
+    <div class="services-work-steps">
+      <div>
+        <div>
+          <p>Step 1</p>
+        </div>
+        <div>
+          <p>{stepOneBold}</p>
+          <p>{stepOneContent}</p>
+        </div>
+      </div>
+      <div>
+        <div>
+          <p>Step 2</p>
+        </div>
+        <div>
+          <p>{stepTwoBold}</p>
+          <p>{stepTwoContent}</p>
+        </div>
+      </div>
+      <div>
+        <div>
+          <p>Step 3</p>
+        </div>
+        <div>
+          <p>{stepThreeBold}</p>
+          <p>{stepThreeContent}</p>
+        </div>
+      </div>
+    </div>
+
+    {
+      linkHref && (
+        <div class="services-work-button">
+          <Button
+            ele="a"
+            btnstyle="two"
+            href={linkHref}
+            rel={
+              buttonType?.includes("external")
+                ? "noopener noreferrer"
+                : undefined
+            }
+          >
+            {buttonText}
+          </Button>
+        </div>
+      )
+    }
+  </div>
+  <div class="services-image">
+    <Image
+      src={bottomImageSrc}
+      alt={bottomImageAlt}
+      format="webp"
+      widths={[800, 1200, 1600, 2000]}
+      sizes="100vw"
+      loading="eager"
+      inferSize={true}
+      class="services-image-img"
+    />
+  </div>
+</div>
