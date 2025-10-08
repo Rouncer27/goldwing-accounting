@@ -47,9 +47,6 @@ export async function getStaticPaths() {
     }));
 }
 
-// 2️⃣ Get the actual page data by slug
-const { slug } = Astro.params;
-
 const pageResponse = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
   method: "POST",
   headers: { "content-type": "application/json" },
