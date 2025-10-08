@@ -1,0 +1,42 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeroSmall from "../components/PageHeroSmall/PageHeroSmall.astro";
+
+import { Page_Seo_Query } from "../data/page/queries";
+import { Page_Hero_Small_Query } from "../data/shared/queries";
+
+const { slug } = Astro.props;
+// console.log("slug", slug);
+// console.log("page", page);
+// 1️⃣ Fetch only the data needed for this template
+const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
+  method: "POST",
+  headers: { "content-type": "application/json" },
+  body: JSON.stringify({
+    query: `
+        query DefaultPage($slug: ID!) {
+            page(id: $slug, idType: URI) {
+                ${Page_Seo_Query}
+                title
+                defaultTemplateFields {
+                    ${Page_Hero_Small_Query}
+                }
+            }
+        }
+    `,
+    variables: { slug },
+  }),
+});
+
+const {
+  data: { page },
+} = await response.json();
+---
+
+<Layout
+  metaImg={page.seoMetaTags.seoMetaInformation.metaImage?.sourceUrl}
+  metaTitle={page.seoMetaTags.seoMetaInformation.metaTitle}
+  metaDescription={page.seoMetaTags.seoMetaInformation.metaDescription}
+>
+  <PageHeroSmall data={page.defaultTemplateFields.pageHeroSmall} />
+</Layout>

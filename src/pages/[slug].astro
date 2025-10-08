@@ -1,0 +1,74 @@
+---
+// @ts-nocheck
+// 1️⃣ Tell Astro which pages to generate
+export async function getStaticPaths() {
+  const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({
+      query: `
+        query AllPages {
+          pages(first: 100) {
+            nodes {
+              slug
+            }
+          }
+        }
+      `,
+    }),
+  });
+
+  const { data } = await response.json();
+
+  // Exclude homepage (since it's handled by index.astro)
+  return data.pages.nodes
+    .filter((page) => page.slug !== "/")
+    .map((page) => ({
+      params: { slug: page.slug },
+    }));
+}
+
+// 2️⃣ Get the actual page data by slug
+const { slug } = Astro.params;
+
+const pageResponse = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
+  method: "POST",
+  headers: { "content-type": "application/json" },
+  body: JSON.stringify({
+    query: `
+      query SinglePage($slug: ID!) {
+        page(id: $slug, idType: URI) {
+          slug
+          template {
+            templateName
+          }
+        }
+      }
+    `,
+    variables: { slug: `/${slug}/` },
+  }),
+});
+
+const { data } = await pageResponse.json();
+const page = data.page;
+
+// Dynamic import based on template name
+const templateName = page?.template?.templateName?.toLowerCase() ?? "default";
+let TemplateComponent;
+
+switch (true) {
+  case templateName.includes("home"):
+    TemplateComponent = (await import("../templates/HomeTemplate.astro"))
+      .default;
+    break;
+  case templateName.includes("about"):
+    TemplateComponent = (await import("../templates/AboutTemplate.astro"))
+      .default;
+    break;
+  default:
+    TemplateComponent = (await import("../templates/DefaultTemplate.astro"))
+      .default;
+}
+---
+
+<TemplateComponent slug={page.slug} />
