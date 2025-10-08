@@ -19,15 +19,19 @@ export async function getStaticPaths() {
   });
 
   const { data } = await response.json();
+  // 1️⃣ Define slugs that are already statically handled
+  const staticSlugs = [
+    "contact",
+    "news-resources",
+    "about-us",
+    "our-services",
+    "home",
+    "/",
+  ];
 
   // Exclude homepage (since it's handled by index.astro)
   return data.pages.nodes
-    .filter((page) => page.slug !== "contact")
-    .filter((page) => page.slug !== "news-resources")
-    .filter((page) => page.slug !== "about-us")
-    .filter((page) => page.slug !== "our-services")
-    .filter((page) => page.slug !== "home")
-    .filter((page) => page.slug !== "/")
+    .filter((page) => !staticSlugs.includes(page.slug))
     .map((page) => ({
       params: { slug: page.slug },
     }));
