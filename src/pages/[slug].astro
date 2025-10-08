@@ -2,18 +2,15 @@
 // @ts-nocheck
 // 1️⃣ Tell Astro which pages to generate
 export async function getStaticPaths() {
-  // 1️⃣ Fetch all pages from WordPress
   const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify({
       query: `
         query AllPages {
-          pages(first: 9999) {
-            edges {
-              node {
-                slug
-              }
+          pages(first: 100) {
+            nodes {
+              slug
             }
           }
         }
@@ -22,28 +19,22 @@ export async function getStaticPaths() {
   });
 
   const { data } = await response.json();
-  const allPages = data.pages.edges;
 
-  // 2️⃣ Define static/locked slugs
-  const staticSlugs = [
-    "contact",
-    "about-us",
-    "news-resources",
-    "our-services",
-    "home",
-    "", // covers root/front page
-  ];
-
-  // 3️⃣ Filter out static slugs so they don't generate [slug] routes
-  const dynamicPages = allPages.filter(
-    ({ node }) => !staticSlugs.includes(node.slug),
-  );
-
-  // 4️⃣ Map to Astro paths
-  return dynamicPages.map(({ node }) => ({
-    params: { slug: node.slug },
-  }));
+  // Exclude homepage (since it's handled by index.astro)
+  return data.pages.nodes
+    .filter((page) => page.slug !== "contact")
+    .filter((page) => page.slug !== "news-resources")
+    .filter((page) => page.slug !== "about-us")
+    .filter((page) => page.slug !== "our-services")
+    .filter((page) => page.slug !== "home")
+    .filter((page) => page.slug !== "/")
+    .map((page) => ({
+      params: { slug: page.slug },
+    }));
 }
+
+// 2️⃣ Get the actual page data by slug
+const { slug } = Astro.params;
 
 const pageResponse = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
   method: "POST",
@@ -65,7 +56,6 @@ const pageResponse = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
 
 const { data } = await pageResponse.json();
 const page = data.page;
-const { slug } = Astro.props;
 
 // Dynamic import based on template name
 const templateName = page?.template?.templateName?.toLowerCase() ?? "default";
