@@ -23,7 +23,6 @@ const settings = {
 };
 
 const ServiceSlider = ({ services }) => {
-  console.log("services", services);
   return (
     <Slider className="services-slider" {...settings}>
       {services.map((service, index) => {

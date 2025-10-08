@@ -2,6 +2,8 @@
 @use "../../../styles/global/headlines";
 
 .services-slider {
+  position: relative;
+  z-index: 11;
   &-slide {
     display: flex !important;
     flex-wrap: wrap;

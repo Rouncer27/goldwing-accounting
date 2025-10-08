@@ -6,6 +6,9 @@ import Wrapper from "../shared/Wrapper.astro";
 import "./services.scss";
 import ServiceSlider from "./ServiceSlider/ServiceSlider";
 
+import wideBrushSwatch from "../../assets/wide-brush-swatch.png";
+import brushstrokeGreen from "../../assets/brushstroke-green.png";
+import angleBrush from "../../assets/angle-brush-2.png";
 const {
   title,
   content,
@@ -45,37 +48,44 @@ const bottomImageAlt = bottomImage?.node?.altText || "";
       <div class="services-intro-content" set:html={content} />
     </div>
   </Wrapper>
-  <ServiceSlider client:only="react" services={services} />
-  <div class="services-work">
-    <div class="services-work-title">
-      <h2>{howToWorkTitle}</h2>
+  <div class="services-slider-wrap">
+    <ServiceSlider client:only="react" services={services} />
+    <div class="services-slider-wrap-brush">
+      <img src={angleBrush.src} alt="" />
     </div>
-    <div class="services-work-steps">
-      <div>
-        <div>
-          <p>Step 1</p>
-        </div>
-        <div>
-          <p>{stepOneBold}</p>
-          <p>{stepOneContent}</p>
-        </div>
+  </div>
+  <div class="services-work">
+    <div class="services-work-container">
+      <div class="services-work-title">
+        <h2>{howToWorkTitle}</h2>
       </div>
-      <div>
-        <div>
-          <p>Step 2</p>
+      <div class="services-work-steps">
+        <div class="services-work-steps-step step-one">
+          <div class="services-work-steps-step-number">
+            <p>Step 1</p>
+          </div>
+          <div class="services-work-steps-step-content">
+            <p>{stepOneBold}</p>
+            <p>{stepOneContent}</p>
+          </div>
         </div>
-        <div>
-          <p>{stepTwoBold}</p>
-          <p>{stepTwoContent}</p>
+        <div class="services-work-steps-step step-two">
+          <div class="services-work-steps-step-number">
+            <p>Step 2</p>
+          </div>
+          <div class="services-work-steps-step-content">
+            <p>{stepTwoBold}</p>
+            <p>{stepTwoContent}</p>
+          </div>
         </div>
-      </div>
-      <div>
-        <div>
-          <p>Step 3</p>
-        </div>
-        <div>
-          <p>{stepThreeBold}</p>
-          <p>{stepThreeContent}</p>
+        <div class="services-work-steps-step step-three">
+          <div class="services-work-steps-step-number">
+            <p>Step 3</p>
+          </div>
+          <div class="services-work-steps-step-content">
+            <p>{stepThreeBold}</p>
+            <p>{stepThreeContent}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -98,17 +108,25 @@ const bottomImageAlt = bottomImage?.node?.altText || "";
         </div>
       )
     }
+    <div class="services-work-brush">
+      <img src={wideBrushSwatch.src} alt="" />
+    </div>
   </div>
   <div class="services-image">
-    <Image
-      src={bottomImageSrc}
-      alt={bottomImageAlt}
-      format="webp"
-      widths={[800, 1200, 1600, 2000]}
-      sizes="100vw"
-      loading="eager"
-      inferSize={true}
-      class="services-image-img"
-    />
+    <div class="services-image-container">
+      <Image
+        src={bottomImageSrc}
+        alt={bottomImageAlt}
+        format="webp"
+        widths={[800, 1200, 1600, 2000]}
+        sizes="100vw"
+        loading="eager"
+        inferSize={true}
+        class="services-image-img"
+      />
+    </div>
+  </div>
+  <div class="services-brush-green">
+    <img src={brushstrokeGreen.src} alt="" />
   </div>
 </div>
