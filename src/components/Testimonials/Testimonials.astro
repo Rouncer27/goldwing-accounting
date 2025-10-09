@@ -1,7 +1,33 @@
 ---
-import "./testimonials.scss";
+import TestimonialsSlider from "./TestimonialsSlider.jsx";
+
+const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
+  method: "POST",
+  headers: {
+    "content-type": "application/json",
+  },
+  body: JSON.stringify({
+    query: `
+        query testimonialsQuery {
+             testimonials {
+                nodes {
+                    title
+                    testimonialsPost {
+                        content
+                    }
+                }
+            }
+        }
+        `,
+  }),
+});
+
+const { data } = await response.json();
+const testimonials = data?.testimonials?.nodes;
 ---
 
-<div>
-  <h1>Testimonials</h1>
-</div>
+<TestimonialsSlider
+  client:only="react"
+  data={{ title: Astro.props.data.title, image: Astro.props.data.image }}
+  testimonials={testimonials ? testimonials : []}
+/>

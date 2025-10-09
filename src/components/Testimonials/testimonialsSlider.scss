@@ -1,0 +1,78 @@
+@use "../../styles/abstracts/" as *;
+@use "../../styles/global/wrappers";
+@use "../../styles/global/headlines";
+@use "../../styles/global/paragraphs";
+
+.testimonials-slider {
+  position: relative;
+  padding: 4rem;
+  background-color: rgba(208, 204, 193, 0.8);
+  z-index: 1000;
+
+  &-brush-stroke-top {
+    position: absolute;
+    top: -1rem;
+    right: -5rem;
+    left: -5rem;
+    height: 6.1rem;
+    z-index: 10;
+  }
+
+  &-brush-stroke-bottom {
+    position: absolute;
+    bottom: -1rem;
+    right: -5rem;
+    left: -5rem;
+    height: 6.1rem;
+    z-index: 10;
+  }
+
+  &-wrapper {
+    @extend .wrap-med;
+    align-items: center;
+    max-width: 100rem !important;
+  }
+
+  &-image {
+    width: calc(25% - 5rem);
+    margin-right: 5rem;
+  }
+
+  &-content {
+    width: calc(75%);
+  }
+
+  &-title {
+    width: 100%;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 0.25rem solid $whiteColor;
+
+    h2 {
+      @extend .hl-three;
+      margin: 0;
+      color: $pineColor;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+  }
+
+  &-slider {
+    width: 100%;
+
+    .slick-dots {
+    }
+  }
+
+  &-slide {
+    p {
+      @extend .hl-four;
+      color: $blackColor;
+    }
+    &-name {
+      p {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
