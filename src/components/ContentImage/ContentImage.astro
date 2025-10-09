@@ -1,0 +1,33 @@
+---
+import { Image } from "astro:assets";
+import Headline from "../shared/Headline.astro";
+import Wrapper from "../shared/Wrapper.astro";
+import "./contentImage.scss";
+
+const { title, content, image } = Astro.props.data;
+
+const imageSrc = image?.node?.sourceUrl;
+const imageAlt = image?.node?.altText || "";
+---
+
+<div class="content-image">
+  <Wrapper>
+    <div class="content-image-content">
+      <div class="content-image-content-title">
+        <Headline ele="h2" hlstyle="four">{title}</Headline>
+      </div>
+      <div class="content-image-content-paragraph" set:html={content} />
+    </div>
+    <div class="content-image-image">
+      <Image
+        src={imageSrc}
+        alt={imageAlt}
+        format="webp"
+        widths={[800, 1200, 1600, 2000]}
+        sizes="100vw"
+        loading="eager"
+        inferSize={true}
+      />
+    </div>
+  </Wrapper>
+</div>

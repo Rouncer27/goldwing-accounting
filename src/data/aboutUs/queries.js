@@ -73,3 +73,20 @@ export const Hero_Intro_Query = `
         }
     }
 `;
+
+export const Content_Image_Query = `
+   	 contentImage: contentImageComponent {
+        title
+        content
+        image {
+            node {
+                sourceUrl
+                altText
+                mediaDetails {
+                    width
+                    height
+                }
+            }
+        }
+    }
+`;
