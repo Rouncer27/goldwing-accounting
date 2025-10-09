@@ -1,8 +1,11 @@
 ---
 import "./steps.scss";
 
-import wideBrushSwatch from "../../assets/wide-brush-swatch.png";
+import wideBrushSwatch from "../../assets/wide-brush-swatch-green.png";
+import angleBrush from "../../assets/angle-brush-3.png";
 import Button from "../shared/Button.astro";
+import Headline from "../shared/Headline.astro";
+import Wrapper from "../shared/Wrapper.astro";
 
 const {
   howtoworktitle,
@@ -27,61 +30,71 @@ if (buttonType?.includes("internal") && buttonLink?.edges?.length) {
 }
 ---
 
-<div class="services">
-  <div class="services-work">
-    <div class="services-work-container">
-      <div class="services-work-title">
+<div class="steps">
+  <div class="steps-work">
+    <div class="steps-work-container">
+      <div class="steps-work-title">
         <h2>{howtoworktitle}</h2>
       </div>
-      <div class="services-work-steps">
-        <div class="services-work-steps-step step-one">
-          <div class="services-work-steps-step-number">
+      <div class="steps-work-steps">
+        <div class="steps-work-steps-step step-one">
+          <div class="steps-work-steps-step-number">
             <p>Step 1</p>
           </div>
-          <div class="services-work-steps-step-content">
+          <div class="steps-work-steps-step-content">
             <p>{stepOneBold}</p>
             <p>{stepOneContent}</p>
           </div>
         </div>
-        <div class="services-work-steps-step step-two">
-          <div class="services-work-steps-step-number">
+        <div class="steps-work-steps-step step-two">
+          <div class="steps-work-steps-step-number">
             <p>Step 2</p>
           </div>
-          <div class="services-work-steps-step-content">
+          <div class="steps-work-steps-step-content">
             <p>{stepTwoBold}</p>
             <p>{stepTwoContent}</p>
           </div>
         </div>
-        <div class="services-work-steps-step step-three">
-          <div class="services-work-steps-step-number">
+        <div class="steps-work-steps-step step-three">
+          <div class="steps-work-steps-step-number">
             <p>Step 3</p>
           </div>
-          <div class="services-work-steps-step-content">
+          <div class="steps-work-steps-step-content">
             <p>{stepThreeBold}</p>
             <p>{stepThreeContent}</p>
           </div>
         </div>
       </div>
     </div>
+    <div class="steps-work-brush">
+      <img src={wideBrushSwatch.src} alt="" />
+    </div>
   </div>
 
   {
     linkHref && (
-      <div class="services-work-button">
-        <Button
-          ele="a"
-          btnstyle="two"
-          href={linkHref}
-          rel={
-            buttonType?.includes("external") ? "noopener noreferrer" : undefined
-          }
-        >
-          {buttonText}
-        </Button>
-      </div>
+      <Wrapper>
+        <div class="steps-work-button">
+          <Headline ele="p" hlstyle="three">
+            <span>Learn More</span>{" "}
+            <Button
+              ele="a"
+              btnstyle="two"
+              href={linkHref}
+              rel={
+                buttonType?.includes("external")
+                  ? "noopener noreferrer"
+                  : undefined
+              }
+            >
+              {buttonText}
+            </Button>
+          </Headline>
+        </div>
+      </Wrapper>
     )
   }
-  <div class="services-work-brush">
-    <img src={wideBrushSwatch.src} alt="" />
+  <div class="steps-angle-brush">
+    <img src={angleBrush.src} alt="" />
   </div>
 </div>
