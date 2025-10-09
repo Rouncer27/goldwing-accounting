@@ -1,3 +1,7 @@
+@use "../../styles/abstracts/" as *;
+@use "../../styles/global/headlines";
+@use "../../styles/global/paragraphs";
+
 .hero-intro {
   position: relative;
   min-height: 100vh;
@@ -46,6 +50,25 @@
         &-content {
           width: calc(80% - 2.5rem);
           margin-left: 2.5rem;
+
+          h3 {
+            @extend .hl-four;
+            font-weight: 600;
+          }
+
+          p {
+            @extend .p-one;
+          }
+
+          a {
+            @extend .p-one;
+            color: $blackColor;
+            text-decoration: underline;
+
+            &:hover {
+              color: $accentColor;
+            }
+          }
         }
       }
     }
