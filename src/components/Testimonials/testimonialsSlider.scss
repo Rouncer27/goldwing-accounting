@@ -3,6 +3,9 @@
 @use "../../styles/global/headlines";
 @use "../../styles/global/paragraphs";
 
+$icon-arrow-left: "/arrow-left.png";
+$icon-arrow-right: "/arrow-right.png";
+
 .testimonials-slider {
   position: relative;
   padding: 4rem;
@@ -61,6 +64,35 @@
     width: 100%;
 
     .slick-dots {
+    }
+
+    .slick-arrow {
+      width: 3.6rem;
+      height: 3.6rem;
+      top: calc(50% - 1.8rem);
+
+      &::before {
+        display: block;
+        width: 3.6rem;
+        height: 3.6rem;
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        content: "";
+      }
+    }
+    .slick-prev {
+      left: calc(-25vw);
+
+      &::before {
+        background-image: url($icon-arrow-left);
+      }
+    }
+    .slick-next {
+      right: calc(-5vw);
+      &::before {
+        background-image: url($icon-arrow-right);
+      }
     }
   }
 
