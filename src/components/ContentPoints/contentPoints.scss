@@ -1,0 +1,81 @@
+@use "../../styles/abstracts/" as *;
+@use "../../styles/global/paragraphs";
+.content-points {
+  background: linear-gradient(to right, $pineColor 20vw, $whiteColor 20vw);
+
+  .content-points-wrapper {
+    margin-top: 0;
+    padding-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  &-left {
+    width: calc(35%);
+    padding: 10rem 5rem 10rem 2rem;
+    background-color: $pineColor;
+
+    &-title {
+      h2 {
+        color: $whiteColor;
+        font-weight: 600;
+      }
+    }
+
+    &-content {
+      p {
+        @extend .p-one;
+        color: $whiteColor;
+      }
+    }
+
+    &-button {
+      margin-bottom: 2rem;
+    }
+  }
+
+  &-right {
+    width: calc(65%);
+    padding: 10rem 2rem;
+
+    &-title {
+      width: calc(100% - 15% - 1rem);
+      margin-left: auto;
+
+      h2 {
+        color: $shadowColor;
+      }
+    }
+
+    &-points {
+      width: 100%;
+
+      &-point {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 5rem;
+
+        &-icon {
+          width: calc(15% - 3rem);
+          margin-right: 1rem;
+          margin-left: 2rem;
+        }
+
+        &-content {
+          width: calc(85% - 1rem);
+          margin-left: 1rem;
+
+          h3 {
+            margin-top: 0;
+            margin-bottom: 0;
+          }
+
+          p {
+            @extend .p-one;
+          }
+        }
+      }
+    }
+  }
+}

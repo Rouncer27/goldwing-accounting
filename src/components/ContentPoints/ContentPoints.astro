@@ -1,0 +1,135 @@
+---
+// @ts-nocheck
+import { Image } from "astro:assets";
+import Button from "../shared/Button.astro";
+import Headline from "../shared/Headline.astro";
+import Wrapper from "../shared/Wrapper.astro";
+import "./contentPoints.scss";
+
+const {
+  titleLeft,
+  contentLeft,
+  buttonRequired,
+  buttonText,
+  buttonType,
+  buttonLink,
+  buttonUrl,
+  secondButtonRequired,
+  sectionButtonText,
+  secondButtonType,
+  secondButtonLink,
+  secondButtonUrl,
+  rightTitle,
+  points,
+} = Astro.props.data;
+
+let linkHref = "#";
+
+if (
+  buttonRequired &&
+  buttonType?.includes("internal") &&
+  buttonLink?.edges?.length
+) {
+  linkHref = buttonLink.edges[0].node.uri;
+} else if (buttonType?.includes("external") && buttonUrl) {
+  linkHref = buttonUrl;
+}
+
+let linkHrefSecond = "#";
+
+if (
+  buttonRequired &&
+  secondButtonRequired &&
+  secondButtonType?.includes("internal") &&
+  secondButtonLink?.edges?.length
+) {
+  linkHrefSecond = secondButtonLink.edges[0].node.uri;
+} else if (secondButtonType?.includes("external") && secondButtonUrl) {
+  linkHrefSecond = secondButtonUrl;
+}
+---
+
+<div class="content-points">
+  <Wrapper classes="content-points-wrapper">
+    <div class="content-points-left">
+      <div class="content-points-left-title">
+        <Headline ele="h2" hlstyle="two">{titleLeft}</Headline>
+      </div>
+
+      <div class="content-points-left-content" set:html={contentLeft} />
+
+      {
+        buttonRequired && linkHref && (
+          <div class="content-points-left-button">
+            <Button
+              ele="a"
+              btnstyle="two"
+              href={linkHref}
+              rel={
+                buttonType?.includes("external")
+                  ? "noopener noreferrer"
+                  : undefined
+              }
+            >
+              {buttonText}
+            </Button>
+          </div>
+        )
+      }
+      {
+        buttonRequired && secondButtonRequired && linkHrefSecond && (
+          <div class="content-points-left-button button-two">
+            <Button
+              ele="a"
+              btnstyle="two"
+              href={linkHrefSecond}
+              rel={
+                secondButtonType?.includes("external")
+                  ? "noopener noreferrer"
+                  : undefined
+              }
+            >
+              {sectionButtonText}
+            </Button>
+          </div>
+        )
+      }
+    </div>
+
+    <div class="content-points-right">
+      <div class="content-points-right-title">
+        <Headline ele="h2" hlstyle="two">{rightTitle}</Headline>
+      </div>
+      <div class="content-points-right-points">
+        {
+          points.map((point) => {
+            const iconSrc = point.icon?.node?.sourceUrl;
+            const iconAlt = point.icon?.node?.altText || point.title;
+            return (
+              <div class="content-points-right-points-point">
+                <div class="content-points-right-points-point-icon">
+                  <Image
+                    src={iconSrc}
+                    alt={iconAlt}
+                    format="webp"
+                    widths={[800, 1200, 1600, 2000]}
+                    sizes="100vw"
+                    inferSize={true}
+                  />
+                </div>
+                <div class="content-points-right-points-point-content">
+                  <div>
+                    <Headline ele="h3" hlstyle="four">
+                      {point.title}
+                    </Headline>
+                  </div>
+                  <div set:html={point.content} />
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+  </Wrapper>
+</div>
