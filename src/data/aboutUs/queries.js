@@ -90,3 +90,28 @@ export const Content_Image_Query = `
         }
     }
 `;
+
+export const Hero_Callout_Query = `
+   	 heroCallout: heroCalloutComponent {
+        title
+        content
+        buttonText
+        buttonLink {
+            edges {
+                node {
+                    uri
+                }
+            }
+        }
+        image {
+            node {
+                sourceUrl
+                altText
+                mediaDetails {
+                    width
+                    height
+                }
+            }
+        }
+    }
+`;

@@ -4,6 +4,7 @@ import PageHero from "../components/PageHero/PageHero.astro";
 import ContentPoints from "../components/ContentPoints/ContentPoints.astro";
 import HeroIntro from "../components/HeroIntro/HeroIntro.astro";
 import ContentImage from "../components/ContentImage/ContentImage.astro";
+import HeroCallout from "../components/HeroCallout/HeroCallout.astro";
 
 import { Page_Seo_Query } from "../data/page/queries";
 import { Page_Hero_Query } from "../data/shared/queries";
@@ -11,6 +12,7 @@ import {
   Content_Points_Query,
   Hero_Intro_Query,
   Content_Image_Query,
+  Hero_Callout_Query,
 } from "../data/aboutUs/queries";
 
 const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
@@ -28,6 +30,7 @@ const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
           ${Content_Points_Query}
           ${Hero_Intro_Query}
           ${Content_Image_Query}
+          ${Hero_Callout_Query}
         }
 			}
 		}
@@ -51,4 +54,5 @@ const {
   <ContentPoints data={aboutPage.contentPoints} />
   <HeroIntro data={aboutPage.heroIntro} />
   <ContentImage data={aboutPage.contentImage} />
+  <HeroCallout data={aboutPage.heroCallout} />
 </Layout>
