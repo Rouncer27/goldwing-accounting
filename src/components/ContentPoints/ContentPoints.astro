@@ -5,6 +5,7 @@ import Button from "../shared/Button.astro";
 import Headline from "../shared/Headline.astro";
 import Wrapper from "../shared/Wrapper.astro";
 import "./contentPoints.scss";
+import angleBrush from "../../assets/angle-brush-4.png";
 
 const {
   titleLeft,
@@ -94,6 +95,14 @@ if (
           </div>
         )
       }
+      <div class="content-points-left-graphic">
+        <Image
+          src={angleBrush}
+          alt="backround graphic"
+          width={407}
+          height={264}
+        />
+      </div>
     </div>
 
     <div class="content-points-right">
