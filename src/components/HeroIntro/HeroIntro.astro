@@ -1,0 +1,65 @@
+---
+// @ts-nocheck
+import "./heroIntro.scss";
+import { Image } from "astro:assets";
+import wideBrushWhite from "../../assets/brushstroke-white.png";
+
+const { title, team, heroImage } = Astro.props.data;
+
+const heroImageSrc = heroImage?.node?.sourceUrl;
+const heroAlt = heroImage?.node?.altText || "";
+---
+
+<div class="hero-intro">
+  <div class="hero-intro-content">
+    <div class="hero-intro-content-wrap">
+      <div class="hero-intro-content-title">
+        <h2>{title}</h2>
+      </div>
+
+      <div class="hero-intro-content-team">
+        {
+          team.map((item) => {
+            return (
+              <div class="hero-intro-content-team-item">
+                <div class="hero-intro-content-team-item-image">
+                  <Image
+                    src={item.image.node.sourceUrl}
+                    alt={item.name}
+                    inferSize={true}
+                  />
+                </div>
+                <div class="hero-intro-content-team-item-content">
+                  <div>
+                    <h3>{item.name}</h3>
+                  </div>
+                  <div set:html={item.content} />
+                  <div>
+                    <p>
+                      <a href={item.buttonUrl}>{item.buttonText}</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+    <div class="hero-intro-content-brush">
+      <img src={wideBrushWhite.src} alt="" />
+    </div>
+  </div>
+  <div class="hero-intro-background">
+    <Image
+      src={heroImageSrc}
+      alt={heroAlt}
+      format="webp"
+      widths={[800, 1200, 1600, 2000]}
+      sizes="100vw"
+      loading="eager"
+      inferSize={true}
+      class="hero-intro-background-img"
+    />
+  </div>
+</div>

@@ -41,3 +41,35 @@ export const Content_Points_Query = `
         }
     }
 `;
+
+export const Hero_Intro_Query = `
+   	 heroIntro: heroIntroComponent {
+        title
+        team {
+            name
+            content
+            buttonText
+            buttonUrl
+            image {
+                node {
+                    sourceUrl
+                    altText
+                    mediaDetails {
+                        width
+                        height
+                    }
+                }
+            }
+        }
+        heroImage {
+            node {
+                sourceUrl
+                altText
+                mediaDetails {
+                    width
+                    height
+                }
+            }
+        }
+    }
+`;

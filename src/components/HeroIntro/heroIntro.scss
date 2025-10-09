@@ -1,0 +1,93 @@
+.hero-intro {
+  position: relative;
+  min-height: 100vh;
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+
+    &-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 85vw;
+      margin-left: auto;
+      margin-right: 4rem;
+      z-index: 100;
+    }
+
+    &-title {
+      width: 100%;
+      max-width: calc(80% - 2.5rem);
+      margin-left: auto;
+    }
+
+    &-team {
+      width: 100%;
+
+      &-item {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+
+        &-image {
+          width: calc(20% - 2.5rem);
+          margin-right: 2.5rem;
+        }
+
+        &-content {
+          width: calc(80% - 2.5rem);
+          margin-left: 2.5rem;
+        }
+      }
+    }
+
+    &-brush {
+      position: absolute;
+      top: 10rem;
+      left: 0;
+      bottom: 10rem;
+      right: -10rem;
+      z-index: 1;
+
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: 100%;
+        object-position: center;
+        z-index: 1;
+      }
+    }
+  }
+
+  &-background {
+    position: absolute;
+    top: 0%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+
+    &-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 1;
+    }
+  }
+}
