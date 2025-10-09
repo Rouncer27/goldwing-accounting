@@ -39,3 +39,9 @@ export const Steps_Query = `
         buttonUrl
     }
 `;
+
+export const Testimonials_Query = `
+   	 testimonials: testimonialsComponent {
+       displayTestimonials
+    }
+`;

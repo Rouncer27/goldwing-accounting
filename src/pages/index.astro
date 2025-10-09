@@ -6,12 +6,8 @@ import Services from "../components/Services/Services.astro";
 import LatestArticle from "../components/LatestArticle/LatestArticle.astro";
 
 import { Page_Seo_Query } from "../data/page/queries";
-import { Page_Hero_Query } from "../data/shared/queries";
-import {
-  Hero_Content_Query,
-  Services_Query,
-  Latest_Article_Query,
-} from "../data/home/queries";
+import { Page_Hero_Query, Latest_Article_Query } from "../data/shared/queries";
+import { Hero_Content_Query, Services_Query } from "../data/home/queries";
 
 const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
   method: "POST",

@@ -43,3 +43,9 @@ export const Page_Hero_Small_Query = `
         }
     }
 `;
+
+export const Latest_Article_Query = `
+   	latestArticle: latestArticleComponent {
+       displayLatestArticle
+    }
+`;

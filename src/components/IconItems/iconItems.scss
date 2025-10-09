@@ -18,8 +18,18 @@
     }
 
     @media (min-width: 1025px) {
-      width: calc(33.333333% - 9rem);
-      margin: 2rem 4.5rem;
+      width: calc(33.333333% - 4rem);
+      margin: 4rem 2rem;
+      padding: 2rem 2rem;
+    }
+
+    &:nth-of-type(3n + 1),
+    &:nth-of-type(3n + 2) {
+      @media (min-width: 1025px) {
+        margin-right: 0rem;
+        padding-right: 4rem;
+        border-right: 0.25rem $shadowColor solid;
+      }
     }
 
     &-icon {

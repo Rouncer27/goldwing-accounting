@@ -3,10 +3,16 @@ import Layout from "../layouts/Layout.astro";
 import PageHero from "../components/PageHero/PageHero.astro";
 import IconItems from "../components/IconItems/IconItems.astro";
 import Steps from "../components/Steps/Steps.astro";
+import Testimonials from "../components/Testimonials/Testimonials.astro";
+import LatestArticle from "../components/LatestArticle/LatestArticle.astro";
 
 import { Page_Seo_Query } from "../data/page/queries";
-import { Page_Hero_Query } from "../data/shared/queries";
-import { Icon_Items_Query, Steps_Query } from "../data/ourServices/queries";
+import { Page_Hero_Query, Latest_Article_Query } from "../data/shared/queries";
+import {
+  Icon_Items_Query,
+  Steps_Query,
+  Testimonials_Query,
+} from "../data/ourServices/queries";
 
 const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
   method: "POST",
@@ -22,6 +28,8 @@ const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
           ${Page_Hero_Query}
           ${Icon_Items_Query}
           ${Steps_Query}
+          ${Testimonials_Query}
+          ${Latest_Article_Query}
         }
 			}
 		}
@@ -44,4 +52,6 @@ const {
   <PageHero data={servicesPage.pageHero} />
   <IconItems data={servicesPage.iconItems} />
   <Steps data={servicesPage.steps} />
+  {servicesPage.testimonials.displayTestimonials ? <Testimonials /> : null}
+  {servicesPage.latestArticle.displayLatestArticle ? <LatestArticle /> : null}
 </Layout>
