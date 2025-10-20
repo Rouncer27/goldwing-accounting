@@ -11,8 +11,10 @@ import {
   Page_Hero_Query,
   Latest_Article_Query,
   Testimonials_Query,
+  Steps_Query,
 } from "../data/shared/queries";
-import { Icon_Items_Query, Steps_Query } from "../data/ourServices/queries";
+
+import { Icon_Items_Query } from "../data/ourServices/queries";
 
 const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
   method: "POST",

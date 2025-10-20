@@ -15,22 +15,28 @@ const {
   stepTwoContent,
   stepThreeBold,
   stepThreeContent,
+  buttonRequired,
   buttonText,
   buttonType,
   buttonLink,
   buttonUrl,
+  backgroundColour,
 } = Astro.props.data;
 
 let linkHref = "#";
 
-if (buttonType?.includes("internal") && buttonLink?.edges?.length) {
+if (
+  buttonRequired &&
+  buttonType?.includes("internal") &&
+  buttonLink?.edges?.length
+) {
   linkHref = buttonLink.edges[0].node.uri;
-} else if (buttonType?.includes("external") && buttonUrl) {
+} else if (buttonRequired && buttonType?.includes("external") && buttonUrl) {
   linkHref = buttonUrl;
 }
 ---
 
-<div class="steps">
+<div class={`steps${backgroundColour[0] === "white" ? " steps-white" : ""}`}>
   <div class="steps-work">
     <div class="steps-work-container">
       <div class="steps-work-title">
@@ -72,7 +78,7 @@ if (buttonType?.includes("internal") && buttonLink?.edges?.length) {
   </div>
 
   {
-    linkHref && (
+    linkHref && buttonRequired && (
       <Wrapper>
         <div class="steps-work-button">
           <Headline ele="p" hlstyle="three">

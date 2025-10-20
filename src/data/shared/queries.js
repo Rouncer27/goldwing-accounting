@@ -66,3 +66,27 @@ export const Testimonials_Query = `
         }
     }
 `;
+
+export const Steps_Query = `
+   	 steps: stepsComponent {
+        howtoworktitle
+        stepOneBold
+        stepOneContent
+        stepTwoBold
+        stepTwoContent
+        stepThreeBold
+        stepThreeContent
+        buttonRequired
+        buttonText
+        buttonType
+        buttonLink {
+            edges {
+                node {
+                    uri
+                }
+            }
+        }
+        buttonUrl
+        backgroundColour
+    }
+`;

@@ -9,6 +9,10 @@
   background-color: $blackColor;
   overflow: hidden;
 
+  &.steps-white {
+    background-color: $whiteColor;
+  }
+
   &-angle-brush {
     position: absolute;
     bottom: -10rem;
