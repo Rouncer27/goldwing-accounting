@@ -2,9 +2,11 @@
 import Layout from "../layouts/Layout.astro";
 import PageHero from "../components/PageHero/PageHero.astro";
 import Steps from "../components/Steps/Steps.astro";
+import HeroContentSmall from "../components/HeroContentSmall/HeroContentSmall.astro";
 
 import { Page_Seo_Query } from "../data/page/queries";
 import { Page_Hero_Query, Steps_Query } from "../data/shared/queries";
+import { Hero_Content_Small_Query } from "../data/contact/queries";
 
 const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
   method: "POST",
@@ -19,6 +21,7 @@ const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
         contactPage {
           ${Page_Hero_Query}
           ${Steps_Query}
+          ${Hero_Content_Small_Query}
         }
 			}
 		}
@@ -40,4 +43,5 @@ const {
 >
   <PageHero data={contactPage.pageHero} />
   <Steps data={contactPage.steps} />
+  <HeroContentSmall data={contactPage.heroContentSmall} />
 </Layout>
