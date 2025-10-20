@@ -1,0 +1,36 @@
+---
+// @ts-nocheck
+import "./faqs.scss";
+import Wrapper from "../shared/Wrapper.astro";
+import Category from "./Category.astro";
+import QuestionAnswer from "./QuestionAnswer.astro";
+import Headline from "../shared/Headline.astro";
+
+const { sections } = Astro.props.data;
+---
+
+<div class="faqs">
+  <Wrapper classes="faqs-wrapper">
+    <div class="faqs-title">
+      <Headline ele="h2" hlstyle="two">Frequently Asked Questions</Headline>
+    </div>
+
+    {
+      sections &&
+        sections.map((section, index) => (
+          <div data-section={`section-${index + 1}`} class="faqs-section">
+            <div class="faqs-section-title">
+              <Headline ele="h3" hlstyle="four">
+                {section.sectionTitle}
+              </Headline>
+            </div>
+
+            {section.category &&
+              section.category.map((cat, index) => (
+                <Category cat={cat} index={index} />
+              ))}
+          </div>
+        ))
+    }
+  </Wrapper>
+</div>

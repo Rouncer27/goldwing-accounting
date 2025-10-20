@@ -1,0 +1,48 @@
+---
+// @ts-nocheck
+import QuestionAnswer from "./QuestionAnswer.astro";
+const { cat, index } = Astro.props;
+---
+
+<div data-category={`category-${index + 1}`} class="faqs-section-category">
+  <!-- 🔵 Make the category title clickable -->
+  <div class="faqs-section-category-title" role="button" tabindex="0">
+    <h3>{cat.categoryTitle}</h3>
+    <span class="faq-category-toggle-icon">+</span>
+  </div>
+
+  <!-- 🔵 Wrap the question list for toggling -->
+  <div class="faqs-section-category-content">
+    {
+      cat.questions &&
+        cat.questions.map((quest, index) => (
+          <QuestionAnswer quest={quest} index={index} />
+        ))
+    }
+  </div>
+</div>
+
+<!-- 🔵 Category-level accordion toggle script -->
+<script>
+  // @ts-nocheck
+  document.addEventListener("DOMContentLoaded", () => {
+    const categories = document.querySelectorAll(".faqs-section-category");
+
+    categories.forEach((cat) => {
+      const title = cat.querySelector(".faqs-section-category-title");
+      const content = cat.querySelector(".faqs-section-category-content");
+      const icon = cat.querySelector(".faq-category-toggle-icon");
+
+      // Initial collapsed state
+      content.style.maxHeight = "0px";
+      content.style.overflow = "hidden";
+      content.style.transition = "max-height 0.4s ease";
+
+      title.addEventListener("click", () => {
+        const isOpen = cat.classList.toggle("open");
+        content.style.maxHeight = isOpen ? content.scrollHeight + "px" : "0px";
+        if (icon) icon.textContent = isOpen ? "-" : "+";
+      });
+    });
+  });
+</script>

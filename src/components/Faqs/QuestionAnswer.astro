@@ -1,0 +1,58 @@
+---
+const { quest, index } = Astro.props;
+---
+
+<div
+  data-questions={`questions-${index + 1}`}
+  class="faqs-section-category-questions"
+>
+  <!-- 🔵 Added wrapper around question for button behavior -->
+  <div
+    class="faqs-section-category-questions-question"
+    role="button"
+    tabindex="0"
+  >
+    <p set:html={quest.question} />
+    <!-- 🔵 Added optional icon -->
+    <!-- <span class="faq-toggle-icon">+</span> -->
+  </div>
+
+  <div class="faqs-section-category-questions-answer">
+    <p set:html={quest.answer} />
+  </div>
+</div>
+
+<!-- 🔵 Added client-side accordion toggle logic -->
+<!-- <script>
+  // @ts-nocheck
+  document.addEventListener("DOMContentLoaded", () => {
+    const faqItems = document.querySelectorAll(
+      ".faqs-section-category-questions",
+    );
+
+    faqItems.forEach((item) => {
+      const question = item.querySelector(
+        ".faqs-section-category-questions-question",
+      );
+      const answer = item.querySelector(
+        ".faqs-section-category-questions-answer",
+      );
+      const icon = item.querySelector(".faq-toggle-icon");
+
+      // Set initial collapsed state
+      answer.style.maxHeight = "0px";
+      answer.style.overflow = "hidden";
+      answer.style.transition = "max-height 0.3s ease";
+
+      question.addEventListener("click", () => {
+        const isOpen = item.classList.toggle("open");
+
+        answer.style.maxHeight = isOpen ? answer.scrollHeight + "px" : "0px";
+
+        if (icon) {
+          icon.textContent = isOpen ? "-" : "+";
+        }
+      });
+    });
+  });
+</script> -->
