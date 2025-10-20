@@ -6,6 +6,9 @@ import Category from "./Category.astro";
 import QuestionAnswer from "./QuestionAnswer.astro";
 import Headline from "../shared/Headline.astro";
 
+import brushStrokePine from "../../assets/brushstroke-pine.png";
+import angleBrush from "../../assets/angle-brush-5.png";
+
 const { sections } = Astro.props.data;
 ---
 
@@ -33,4 +36,10 @@ const { sections } = Astro.props.data;
         ))
     }
   </Wrapper>
+  <div class="faqs-graphic">
+    <img src={brushStrokePine.src} alt="" />
+  </div>
+  <div class="faqs-brush">
+    <img src={angleBrush.src} alt="" />
+  </div>
 </div>

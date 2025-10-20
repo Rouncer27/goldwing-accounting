@@ -2,8 +2,26 @@
 @use "../../styles/global/paragraphs";
 
 .faqs {
+  position: relative;
   padding: 5rem 0;
   background-color: $pineColor;
+
+  &-graphic {
+    position: absolute;
+    top: -2rem;
+    left: 0;
+    width: 100%;
+    height: 6rem;
+    z-index: 10;
+  }
+
+  &-brush {
+    position: absolute;
+    top: 60rem;
+    right: -15rem;
+    width: 83.7rem;
+    height: 54.4rem;
+  }
 
   &-title {
     width: 100%;
@@ -15,10 +33,12 @@
   }
 
   &-section {
+    position: relative;
     width: 100%;
     margin-bottom: 2.5rem;
     padding-bottom: 2.5rem;
     border-bottom: solid 0.1rem $whiteColor;
+    z-index: 100;
 
     &-title {
       width: 100%;
