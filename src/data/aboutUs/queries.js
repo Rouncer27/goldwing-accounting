@@ -115,3 +115,18 @@ export const Hero_Callout_Query = `
         }
     }
 `;
+
+export const Faqs_Query = `
+   	faqs: faqsComponent {
+        sections {
+            sectionTitle
+            category {
+            categoryTitle
+                questions {
+                    question
+                    answer
+                }
+            }
+        }
+    }
+`;

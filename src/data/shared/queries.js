@@ -49,3 +49,20 @@ export const Latest_Article_Query = `
        displayLatestArticle
     }
 `;
+
+export const Testimonials_Query = `
+   	 testimonials: testimonialsComponent {
+       displayTestimonials
+       title
+       image {
+            node {
+                sourceUrl
+                altText
+                mediaDetails {
+                    width
+                    height
+                }
+            }
+        }
+    }
+`;

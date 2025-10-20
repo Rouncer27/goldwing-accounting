@@ -5,14 +5,17 @@ import ContentPoints from "../components/ContentPoints/ContentPoints.astro";
 import HeroIntro from "../components/HeroIntro/HeroIntro.astro";
 import ContentImage from "../components/ContentImage/ContentImage.astro";
 import HeroCallout from "../components/HeroCallout/HeroCallout.astro";
+import Faqs from "../components/Faqs/Faqs";
+import Testimonials from "../components/Testimonials/Testimonials.astro";
 
 import { Page_Seo_Query } from "../data/page/queries";
-import { Page_Hero_Query } from "../data/shared/queries";
+import { Page_Hero_Query, Testimonials_Query } from "../data/shared/queries";
 import {
   Content_Points_Query,
   Hero_Intro_Query,
   Content_Image_Query,
   Hero_Callout_Query,
+  Faqs_Query,
 } from "../data/aboutUs/queries";
 
 const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
@@ -31,6 +34,8 @@ const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
           ${Hero_Intro_Query}
           ${Content_Image_Query}
           ${Hero_Callout_Query}
+          ${Faqs_Query}
+          ${Testimonials_Query}
         }
 			}
 		}
@@ -55,4 +60,6 @@ const {
   <HeroIntro data={aboutPage.heroIntro} />
   <ContentImage data={aboutPage.contentImage} />
   <HeroCallout data={aboutPage.heroCallout} />
+  <Faqs client:only="react" data={aboutPage.faqs} />
+  <Testimonials data={aboutPage.testimonials} />
 </Layout>
