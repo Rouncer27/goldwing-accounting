@@ -1,0 +1,15 @@
+---
+import Wrapper from "../shared/Wrapper.astro";
+import Wysiwyg from "../shared/Wysiwyg.astro";
+import "./articleWysiwyg.scss";
+
+const { post } = Astro.props;
+---
+
+<article class="main-article">
+  <Wrapper classes="main-article-wrapper">
+    <Wysiwyg>
+      <div set:html={post.postFields.article} />
+    </Wysiwyg>
+  </Wrapper>
+</article>

@@ -1,0 +1,38 @@
+---
+import "./articleIntro.scss";
+import { Image } from "astro:assets";
+import Headline from "../shared/Headline.astro";
+import Wrapper from "../shared/Wrapper.astro";
+
+const { post } = Astro.props;
+
+const featuredImageSrc = post.postFields.featuredImage?.node?.sourceUrl;
+const featuredImageAlt = post.postFields.featuredImage?.node?.altText || "";
+---
+
+<div class="article-intro">
+  <Wrapper classes="article-intro-wrapper">
+    <div class="article-intro-image">
+      <div class="article-intro-image-inner">
+        <Image
+          src={featuredImageSrc}
+          alt={featuredImageAlt}
+          format="webp"
+          widths={[800, 1200, 1600, 2000]}
+          sizes="100vw"
+          loading="eager"
+          inferSize={true}
+        />
+      </div>
+    </div>
+    <div class="article-intro-intro">
+      <div class="article-intro-intro-title">
+        <Headline ele="h1" hlstyle="three">{post.title}</Headline>
+      </div>
+      <div
+        class="article-intro-intro-excerpt"
+        set:html={post.postFields.excerpt}
+      />
+    </div>
+  </Wrapper>
+</div>

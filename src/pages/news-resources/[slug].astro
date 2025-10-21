@@ -1,6 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import PageHeroSmall from "../../components/PageHeroSmall/PageHeroSmall.astro";
+import ArticleIntro from "../../components/ArticleIntro/ArticleIntro.astro";
+import ArticleWysiwyg from "../../components/ArticleWysiwyg/ArticleWysiwyg.astro";
 
 import {
   Default_Page_Hero_Query,
@@ -55,6 +57,20 @@ const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
         ${Page_Seo_Query}
         title
         date
+         postFields {
+          excerpt
+          article
+          featuredImage  {
+            node {
+              sourceUrl
+              altText
+              mediaDetails {
+                width
+                height
+              }
+            }
+          }
+        }
       }
 
       ${Default_Page_Hero_Query}
@@ -83,7 +99,6 @@ const {
   metaDescription={seoMetaTags.seoMetaInformation.metaDescription}
 >
   <PageHeroSmall data={{ image: defaultPageHero, title: "News & Resources" }} />
-  <div>
-    <h1>Post: {post.title}</h1>
-  </div>
+  <ArticleIntro post={post} />
+  <ArticleWysiwyg post={post} />
 </Layout>
