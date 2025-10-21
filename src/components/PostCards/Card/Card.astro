@@ -1,8 +1,36 @@
 ---
+import { Image } from "astro:assets";
 import "./card.scss";
+import Button from "../../shared/Button.astro";
 const { post } = Astro.props;
+
+const featuredImageSrc = post.postFields.featuredImage?.node?.sourceUrl;
+const featuredImageAlt = post.postFields.featuredImage?.node?.altText || "";
 ---
 
 <div class="post-card">
-  <h1><a href={`/news-resources/${post.slug}`}>{post.title}</a></h1>
+  <div class="post-card-image">
+    <div class="post-card-image-inner">
+      <Image
+        src={featuredImageSrc}
+        alt={featuredImageAlt}
+        format="webp"
+        widths={[800, 1200, 1600, 2000]}
+        sizes="100vw"
+        loading="eager"
+        inferSize={true}
+      />
+    </div>
+  </div>
+  <div class="post-card-intro">
+    <div class="post-card-intro-title">
+      <h1><a href={`/news-resources/${post.slug}`}>{post.title}</a></h1>
+    </div>
+    <div set:html={post.postFields.excerpt} />
+    <div>
+      <Button ele="a" btnstyle="two" href={`/news-resources/${post.slug}`}
+        >Read More</Button
+      >
+    </div>
+  </div>
 </div>

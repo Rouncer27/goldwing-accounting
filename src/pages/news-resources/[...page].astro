@@ -22,6 +22,19 @@ export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
               node {
                 slug
                 title
+                postFields {
+                  excerpt
+                  featuredImage  {
+                    node {
+                      sourceUrl
+                      altText
+                      mediaDetails {
+                        width
+                        height
+                      }
+                    }
+                  }
+                }
               }
             }
           }
