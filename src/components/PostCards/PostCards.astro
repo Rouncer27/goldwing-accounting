@@ -7,8 +7,8 @@ import "./postCards.scss";
 const { allPosts } = Astro.props;
 ---
 
-<div>
-  <Wrapper>
+<div class="articles">
+  <Wrapper classes="articles-wrapper">
     {
       allPosts.map((post) => {
         return <Card post={post.node} />;
