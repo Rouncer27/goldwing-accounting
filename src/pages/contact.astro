@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import PageHero from "../components/PageHero/PageHero.astro";
 import Steps from "../components/Steps/Steps.astro";
+import BookConsultation from "../components/BookConsultation/BookConsultation.astro";
 import HeroContentSmall from "../components/HeroContentSmall/HeroContentSmall.astro";
 
 import { Page_Seo_Query } from "../data/page/queries";
@@ -43,5 +44,6 @@ const {
 >
   <PageHero data={contactPage.pageHero} />
   <Steps data={contactPage.steps} />
+  <BookConsultation />
   <HeroContentSmall data={contactPage.heroContentSmall} />
 </Layout>

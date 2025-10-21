@@ -21,7 +21,7 @@
     @extend .p-two;
     display: block;
     width: 100%;
-    color: $whiteColor;
+    color: $blackColor;
     padding-left: 1.5rem;
 
     &:hover {
@@ -44,10 +44,15 @@
     @extend .p-two;
     display: block;
     width: 100%;
-    padding: 1rem;
+    padding: 1rem 1.5rem;
     border: 0.1rem solid transparent;
-    border-radius: 10rem;
-    background-color: $whiteColor;
+    border-radius: 0;
+    background-color: rgba(181, 178, 169, 0.45);
     color: $blackColor;
+  }
+
+  input::placeholder {
+    font-weight: bold;
+    color: $whiteColor;
   }
 }

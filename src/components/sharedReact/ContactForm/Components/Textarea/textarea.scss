@@ -18,11 +18,11 @@
   }
 
   label {
-    @extend .p-two;
+    @extend .p-one;
     display: block;
     width: 100%;
     padding-left: 1.5rem;
-    color: $whiteColor;
+    color: $blackColor;
 
     &:hover {
       cursor: initial;
@@ -37,7 +37,7 @@
     }
 
     .error-active {
-      @extend .p-three;
+      @extend .p-two;
       display: inline-block;
       color: red;
       padding-left: 2rem;
@@ -48,10 +48,15 @@
     @extend .p-two;
     display: block;
     width: 100%;
-    padding: 1rem;
+    padding: 1rem 1.5rem;
     border: 0.1rem solid transparent;
-    border-radius: 2rem;
-    background-color: $whiteColor;
+    border-radius: 0;
+    background-color: rgba(181, 178, 169, 0.45);
     color: $blackColor;
+  }
+
+  textarea::placeholder {
+    font-weight: bold;
+    color: $whiteColor;
   }
 }

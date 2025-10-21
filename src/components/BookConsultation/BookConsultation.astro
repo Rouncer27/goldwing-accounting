@@ -1,0 +1,23 @@
+---
+import Wrapper from "../shared/Wrapper.astro";
+import ContactForm from "../sharedReact/ContactForm/ContactForm";
+import "./bookConsultation.scss";
+---
+
+<div class="book">
+  <Wrapper classes="book-wrapper">
+    <div class="book-intro">
+      <div class="book-intro-title">
+        <h2>Book Your Consultation</h2>
+      </div>
+      <div class="book-intro-content">
+        <p>
+          Book an appointment with us so we can learn about your goals and
+          business.
+        </p>
+        <p>From there we will make a custom plan and strategy for you.</p>
+      </div>
+    </div>
+    <ContactForm client:only="react" />
+  </Wrapper>
+</div>

@@ -1,0 +1,21 @@
+.book {
+  &-wrapper {
+    max-width: 80rem !important;
+  }
+
+  &-intro {
+    width: 100%;
+
+    &-title {
+      width: 100%;
+    }
+
+    &-content {
+      width: 100%;
+
+      p {
+        margin: 0;
+      }
+    }
+  }
+}
