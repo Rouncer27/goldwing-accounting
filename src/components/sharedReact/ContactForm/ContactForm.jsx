@@ -108,7 +108,7 @@ const ContactForm = () => {
           />
         </fieldset>
         <div className="contact-form-fields-button">
-          <button type="submit">Submit</button>
+          <button type="submit">Send Message</button>
         </div>
       </form>
       {formStatus.submitting && <SubmitModal />}
