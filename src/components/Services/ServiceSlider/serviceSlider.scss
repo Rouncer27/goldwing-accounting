@@ -4,6 +4,7 @@
 .services-slider {
   position: relative;
   z-index: 11;
+
   &-slide {
     display: flex !important;
     flex-wrap: wrap;
@@ -11,8 +12,11 @@
     justify-content: flex-start;
     align-items: center;
     position: relative;
-    width: 36.7rem;
     height: 35.7rem;
+
+    @media (min-width: 1025px) {
+      height: 35.7rem;
+    }
 
     &-icon {
       position: relative;
@@ -44,8 +48,25 @@
       left: 0;
       right: 0;
       margin: auto;
-      width: 36.7rem;
-      height: 35.7rem;
+      width: calc(36.7rem / 1);
+      height: calc(35.7rem / 1);
+
+      @media (min-width: 768px) {
+        width: calc(36.7rem / 1.2);
+        height: calc(35.7rem / 1.2);
+      }
+
+      @media (min-width: 1025px) {
+        width: calc(36.7rem / 1.2);
+        height: calc(35.7rem / 1.2);
+        background-color: transparent;
+      }
+
+      @media (min-width: 1400px) {
+        width: 36.7rem;
+        height: 35.7rem;
+        background-color: transparent;
+      }
 
       img {
         position: absolute;

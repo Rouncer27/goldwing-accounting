@@ -6,22 +6,39 @@ import "./serviceSlider.scss";
 import circleTexture from "../../../assets/circle-texture.png";
 
 const settings = {
-  slidesToShow: 3,
-  slidesToScroll: 1,
-  initialSlide: 1,
-  fade: false,
+  dots: false,
   draggable: true,
   infinite: true,
   speed: 500,
-  autoplay: true,
-  autoplaySpeed: 6000,
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  initialSlide: 1,
   centerMode: true,
   centerPadding: "125px",
-  arrows: true,
-  dots: false,
-  pauseOnHover: true,
+  responsive: [
+    {
+      breakpoint: 1250,
+      settings: {
+        slidesToShow: 2,
+        centerPadding: "0px",
+      },
+    },
+    {
+      breakpoint: 1025,
+      settings: {
+        slidesToShow: 2,
+        centerPadding: "0px",
+      },
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 1,
+        centerPadding: "0px",
+      },
+    },
+  ],
 };
-
 const ServiceSlider = ({ services }) => {
   return (
     <Slider className="services-slider" {...settings}>

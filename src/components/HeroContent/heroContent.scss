@@ -2,8 +2,12 @@
 
 .hero-content {
   position: relative;
-  padding-bottom: 50rem;
+  padding-bottom: 20rem;
   z-index: 100;
+
+  @media (min-width: 768px) {
+    padding-bottom: 50rem;
+  }
 
   &__container {
     position: relative;
@@ -17,7 +21,11 @@
 
     &--main {
       width: 100%;
-      max-width: 39rem;
+      max-width: 25rem;
+
+      @media (min-width: 768px) {
+        max-width: 39rem;
+      }
     }
   }
 
