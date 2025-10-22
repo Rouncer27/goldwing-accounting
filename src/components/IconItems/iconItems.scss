@@ -1,7 +1,19 @@
 @use "../../styles/abstracts/" as *;
+@use "../../styles/global/headlines";
 
 .icon-items {
   background-color: $blackColor;
+
+  &-intro {
+    max-width: 105rem;
+    padding: 10rem 0 2rem;
+    text-align: center;
+
+    p {
+      @extend .hl-four;
+      color: $whiteColor;
+    }
+  }
 
   &-list {
     display: flex;

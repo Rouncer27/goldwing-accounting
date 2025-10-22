@@ -7,6 +7,7 @@ import Wrapper from "../shared/Wrapper.astro";
 
 const { data } = Astro.props;
 const {
+  contentAtTop,
   centreContent,
   mainTitle,
   contentRequired,
@@ -51,7 +52,7 @@ const heroAlt = image?.node?.altText || "Hero image";
   </div>
 
   <Wrapper
-    classes={`page-hero__content${centreContent ? " page-hero__content--center" : ""}`}
+    classes={`page-hero__content${centreContent ? " page-hero__content--center" : ""}${contentAtTop ? " page-hero__content--content-top" : ""}`}
   >
     <div class="page-hero__title">
       <Headline ele="h1" hlstyle="one">{mainTitle}</Headline>
