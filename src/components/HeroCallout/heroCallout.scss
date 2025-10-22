@@ -9,13 +9,18 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 100rem;
-    padding: 6rem 8rem;
+    width: calc(100% - 4rem);
+    padding: 3rem 2rem;
     border-radius: 2.1rem;
     transform: translate(-50%, -50%);
     background: rgba(1, 1, 1, 0.44);
     text-align: center;
     z-index: 10;
+
+    @media (min-width: 768px) {
+      width: 100rem;
+      padding: 6rem 8rem;
+    }
 
     &-title {
       h2 {
