@@ -1,9 +1,22 @@
 .content-image {
+  &-wrapper {
+    align-items: center;
+  }
+
   &-content {
-    width: calc(70%);
+    width: calc(100%);
+
+    @media (min-width: 768px) {
+      width: calc(70% - 7rem);
+      margin-right: 7rem;
+    }
   }
 
   &-image {
-    width: calc(30%);
+    width: calc(100%);
+
+    @media (min-width: 768px) {
+      width: calc(30%);
+    }
   }
 }
