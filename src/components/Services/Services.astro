@@ -5,6 +5,8 @@ import Headline from "../shared/Headline.astro";
 import Wrapper from "../shared/Wrapper.astro";
 import "./services.scss";
 import ServiceSlider from "./ServiceSlider/ServiceSlider";
+import TabletSlider from "./ServiceSlider/TabletSlider";
+import MobileSlider from "./ServiceSlider/MobileSlider";
 
 import wideBrushSwatch from "../../assets/wide-brush-swatch.png";
 import brushstrokeGreen from "../../assets/brushstroke-green.png";
@@ -50,6 +52,8 @@ const bottomImageAlt = bottomImage?.node?.altText || "";
   </Wrapper>
   <div class="services-slider-wrap">
     <ServiceSlider client:only="react" services={services} />
+    <TabletSlider client:only="react" services={services} />
+    <MobileSlider client:only="react" services={services} />
     <div class="services-slider-wrap-brush">
       <img src={angleBrush.src} alt="" />
     </div>

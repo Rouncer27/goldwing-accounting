@@ -10,19 +10,17 @@ const settings = {
   draggable: true,
   infinite: true,
   speed: 500,
-  slidesToShow: 3,
+  slidesToShow: 1,
   slidesToScroll: 1,
   initialSlide: 1,
-  centerMode: true,
-  centerPadding: "125px",
 };
-const ServiceSlider = ({ services }) => {
-  const [isMobile, setIsMobile] = useState(true);
+const MobileSlider = ({ services }) => {
+  const [isDesktop, setIsDesktop] = useState(true);
 
   // Track window width
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024); // mobile <768px
+      setIsDesktop(window.innerWidth > 768);
     };
 
     checkMobile(); // initial check
@@ -32,7 +30,7 @@ const ServiceSlider = ({ services }) => {
   }, []);
 
   // If mobile, return null (unmount slider)
-  if (isMobile) return null;
+  if (isDesktop) return null;
   return (
     <Slider className="services-slider" {...settings}>
       {services.map((service, index) => {
@@ -57,4 +55,4 @@ const ServiceSlider = ({ services }) => {
   );
 };
 
-export default ServiceSlider;
+export default MobileSlider;
