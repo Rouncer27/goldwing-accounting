@@ -48,8 +48,6 @@ export const Hero_Intro_Query = `
         team {
             name
             content
-            buttonText
-            buttonUrl
             image {
                 node {
                     sourceUrl

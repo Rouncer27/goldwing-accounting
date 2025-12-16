@@ -34,11 +34,6 @@ const heroAlt = heroImage?.node?.altText || "";
                     <h3>{item.name}</h3>
                   </div>
                   <div set:html={item.content} />
-                  <div>
-                    <p>
-                      <a href={item.buttonUrl}>{item.buttonText}</a>
-                    </p>
-                  </div>
                 </div>
               </div>
             );
