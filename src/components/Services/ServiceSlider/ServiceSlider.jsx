@@ -10,31 +10,33 @@ const settings = {
   draggable: true,
   infinite: true,
   speed: 500,
-  slidesToShow: 3,
+  slidesToShow: 1,
   slidesToScroll: 1,
-  initialSlide: 1,
-  centerMode: true,
-  centerPadding: "125px",
+  centerMode: false,
+  centerPadding: "0",
   responsive: [
     {
-      breakpoint: 1250,
+      breakpoint: 768,
       settings: {
-        slidesToShow: 2,
-        centerPadding: "0px",
+        slidesToShow: 1,
       },
     },
     {
       breakpoint: 1025,
       settings: {
         slidesToShow: 2,
-        centerPadding: "0px",
       },
     },
     {
-      breakpoint: 768,
+      breakpoint: 1250,
       settings: {
-        slidesToShow: 1,
-        centerPadding: "0px",
+        slidesToShow: 3,
+      },
+    },
+    {
+      breakpoint: 2000,
+      settings: {
+        slidesToShow: 3,
       },
     },
   ],
