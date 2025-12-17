@@ -2,6 +2,11 @@
 @use "../../../styles/global/headlines";
 @use "../../../styles/global/paragraphs";
 
+.slick-slider {
+  touch-action: pan-y;
+  -ms-touch-action: pan-y;
+}
+
 .services-slider {
   position: relative;
   z-index: 11;
