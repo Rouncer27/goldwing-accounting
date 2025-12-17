@@ -66,7 +66,12 @@
 
     &-title {
       width: calc(100% - 15% - 1rem);
+      margin-bottom: 5rem;
       margin-left: auto;
+
+      @media (min-width: 768px) {
+        margin-bottom: 0;
+      }
 
       h2 {
         color: $shadowColor;
@@ -83,21 +88,29 @@
         margin-bottom: 3rem;
 
         &-icon {
-          width: calc(20% - 3rem);
-          margin-right: 1rem;
-          margin-left: 2rem;
+          width: calc(100%);
+          margin-bottom: 2.5rem;
 
           @media (min-width: 768px) {
             width: calc(15% - 3rem);
+            margin-right: 1rem;
+            margin-bottom: 0;
+            margin-left: 2rem;
+          }
+
+          img {
+            max-width: 10rem;
           }
         }
 
         &-content {
-          width: calc(80% - 1rem);
-          margin-left: 1rem;
+          width: calc(100%);
+          text-align: center;
 
           @media (min-width: 768px) {
             width: calc(85% - 1rem);
+            margin-left: 1rem;
+            text-align: left;
           }
 
           h3 {

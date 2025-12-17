@@ -4,7 +4,11 @@
 
 .hero-intro {
   position: relative;
-  min-height: 100vh;
+  min-height: 100rem;
+
+  @media (min-width: 768px) {
+    min-height: 100vh;
+  }
 
   &-content {
     display: flex;
@@ -27,7 +31,8 @@
     }
 
     &-title {
-      width: 100%;
+      width: calc(100% - 2.5rem);
+      margin-left: 2.5rem;
 
       @media (min-width: 768px) {
         max-width: calc(80% - 2.5rem);
@@ -46,10 +51,10 @@
         justify-content: center;
 
         &-image {
-          width: calc(100%);
+          width: calc(100% - 2.5rem);
           max-width: 20rem;
           margin-top: 2rem;
-          margin-left: 0;
+          margin-left: 2.5rem;
           margin-bottom: 2rem;
           margin-right: auto;
 
@@ -64,6 +69,9 @@
         }
 
         &-content {
+          width: calc(100% - 2.5rem);
+          margin-left: 2.5rem;
+
           @media (min-width: 768px) {
             width: calc(80% - 2.5rem);
             margin-left: 2.5rem;
