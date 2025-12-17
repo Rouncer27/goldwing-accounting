@@ -5,7 +5,7 @@ import ContentPoints from "../components/ContentPoints/ContentPoints.astro";
 import HeroIntro from "../components/HeroIntro/HeroIntro.astro";
 import ContentImage from "../components/ContentImage/ContentImage.astro";
 import HeroCallout from "../components/HeroCallout/HeroCallout.astro";
-import Faqs from "../components/Faqs/Faqs.astro";
+import FaqsList from "../components/Faqs/FaqsList.astro";
 import Testimonials from "../components/Testimonials/Testimonials.astro";
 
 import { Page_Seo_Query } from "../data/page/queries";
@@ -60,6 +60,6 @@ const {
   <HeroIntro data={aboutPage.heroIntro} />
   <ContentImage data={aboutPage.contentImage} />
   <HeroCallout data={aboutPage.heroCallout} />
-  <Faqs data={aboutPage.faqs} />
+  <FaqsList data={aboutPage.faqs} />
   <Testimonials data={aboutPage.testimonials} />
 </Layout>

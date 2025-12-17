@@ -1,0 +1,44 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeroSmall from "../components/PageHeroSmall/PageHeroSmall.astro";
+import FaqsList from "../components/Faqs/FaqsList.astro";
+
+import { Page_Seo_Query } from "../data/page/queries";
+import { Page_Hero_Small_Query } from "../data/shared/queries";
+import { Faqs_Query } from "../data/aboutUs/queries";
+
+const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
+  method: "POST",
+  headers: {
+    "content-type": "application/json",
+  },
+  body: JSON.stringify({
+    query: `
+		query homePageQuery {
+			page(id: "/faqs", idType: URI) {
+				${Page_Seo_Query}
+        faqsPage {
+            ${Page_Hero_Small_Query}
+            ${Faqs_Query}
+        }
+			}
+		}
+	`,
+  }),
+});
+
+const {
+  data: {
+    page: { seoMetaTags, faqsPage },
+  },
+} = await response.json();
+---
+
+<Layout
+  metaImg={seoMetaTags.seoMetaInformation.metaImage.sourceUrl}
+  metaTitle={seoMetaTags.seoMetaInformation.metaTitle}
+  metaDescription={seoMetaTags.seoMetaInformation.metaDescription}
+>
+  <PageHeroSmall data={faqsPage.pageHeroSmall} />
+  <FaqsList data={faqsPage.faqs} />
+</Layout>
