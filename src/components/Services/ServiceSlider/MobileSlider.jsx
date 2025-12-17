@@ -7,17 +7,11 @@ import circleTexture from "../../../assets/circle-texture.png";
 
 const settings = {
   dots: false,
-  draggable: true,
-  swipe: true,
-  touchMove: true,
   touchThreshold: 100,
   infinite: true,
   speed: 500,
-  autoplay: true,
-  autoplaySpeed: 4000,
   slidesToShow: 1,
   slidesToScroll: 1,
-  initialSlide: 1,
 };
 const MobileSlider = ({ services }) => {
   const [isDesktop, setIsDesktop] = useState(true);
