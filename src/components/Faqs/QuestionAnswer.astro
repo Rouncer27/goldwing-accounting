@@ -1,4 +1,6 @@
 ---
+import Wysiwyg from "../shared/Wysiwyg.astro";
+
 const { quest, index } = Astro.props;
 ---
 
@@ -18,7 +20,7 @@ const { quest, index } = Astro.props;
   </div>
 
   <div class="faqs-section-category-questions-answer">
-    <p set:html={quest.answer} />
+    <Wysiwyg set:html={quest.answer} />
   </div>
 </div>
 
