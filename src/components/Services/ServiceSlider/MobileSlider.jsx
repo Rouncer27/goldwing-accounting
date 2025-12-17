@@ -8,6 +8,9 @@ import circleTexture from "../../../assets/circle-texture.png";
 const settings = {
   dots: false,
   draggable: true,
+  swipe: true,
+  touchMove: true,
+  touchThreshold: 10,
   infinite: true,
   speed: 500,
   autoplay: true,
