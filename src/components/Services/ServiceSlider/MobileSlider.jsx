@@ -10,7 +10,7 @@ const settings = {
   draggable: true,
   swipe: true,
   touchMove: true,
-  touchThreshold: 10,
+  touchThreshold: 100,
   infinite: true,
   speed: 500,
   autoplay: true,
