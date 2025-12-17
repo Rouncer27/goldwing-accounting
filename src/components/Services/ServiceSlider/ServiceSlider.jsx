@@ -15,6 +15,7 @@ const settings = {
   initialSlide: 1,
   centerMode: true,
   centerPadding: "125px",
+  arrow: false,
 };
 const ServiceSlider = ({ services }) => {
   const [isMobile, setIsMobile] = useState(true);

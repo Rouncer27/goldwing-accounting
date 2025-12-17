@@ -58,17 +58,12 @@
     z-index: 100000;
 
     &-brush {
-      display: none;
       position: absolute;
       top: -5rem;
       right: -10rem;
       width: 95rem;
       height: 56.8rem;
       z-index: 1;
-
-      @media (min-width: 768px) {
-        display: block;
-      }
     }
   }
 
