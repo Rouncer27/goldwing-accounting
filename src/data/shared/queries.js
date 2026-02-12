@@ -91,3 +91,9 @@ export const Steps_Query = `
         backgroundColour
     }
 `;
+
+export const Simple_Content_Query = `
+   	simpleContent: simpleContentComponent {
+        content
+    }
+`;

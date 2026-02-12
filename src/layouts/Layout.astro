@@ -3,6 +3,7 @@
 // Import Components
 import Header from "./Header.astro";
 import Footer from "./Footer.astro";
+import CookieConsent from "../components/sharedReact/CookieConsent/CookieContent";
 // Import Fonts
 import "@fontsource/source-sans-pro/400.css";
 import "@fontsource/source-sans-pro/600.css";
@@ -70,11 +71,88 @@ const jsonLd = JSON.stringify(schema);
     <meta name="twitter:image:alt" content={description} />
     <meta name="twitter:creator" content={"Goldwing Accounting"} />
 
+    <!-- Google tag (gtag.js) -->
+    <script
+      is:inline
+      src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      // Set everything to decline by default //
+      gtag("consent", "default", {
+        ad_storage: "denied",
+        analytics_storage: "denied",
+        functionality_storage: "denied",
+        personalization_storage: "denied",
+        security_storage: "denied",
+      });
+      gtag("js", new Date());
+      gtag("config", "G-XXXXXXXXXX");
+    </script>
+
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+
+      // global function so that it can be called from anywhere
+      // Updates consent for GA4 to granted if called
+      window.consentGranted = function () {
+        console.log("consent granted");
+        gtag("consent", "update", {
+          ad_storage: "granted",
+          analytics_storage: "granted",
+          functionality_storage: "granted",
+          personalization_storage: "granted",
+          security_storage: "granted",
+        });
+      };
+
+      // Returns value of a cookie named 'cookie-consent'
+      // Should be either "granted" or "denied"
+      window.getCookieConsent = function () {
+        try {
+          const consent = document.cookie.match(
+            /gwa-cookie-consent=([^;]+)/,
+          )[1];
+          return consent;
+        } catch (error) {
+          return "unk";
+        }
+      };
+
+      if (window.getCookieConsent() == "granted") {
+        // If cookies already approved, set that
+        console.log("default set to granted");
+        gtag("consent", "default", {
+          ad_storage: "granted",
+          analytics_storage: "granted",
+          functionality_storage: "granted",
+          personalization_storage: "granted",
+          security_storage: "granted",
+        });
+      } else {
+        // default all to 'denied'.
+        console.log("default set to denied");
+        gtag("consent", "default", {
+          ad_storage: "denied",
+          analytics_storage: "denied",
+          functionality_storage: "denied",
+          personalization_storage: "denied",
+          security_storage: "denied",
+        });
+      }
+    </script>
+
     <script type="application/ld+json" is:inline set:html={jsonLd} />
   </head>
   <body>
     <Header />
     <slot />
+    <CookieConsent client:only="react" />
     <Footer />
   </body>
 </html>

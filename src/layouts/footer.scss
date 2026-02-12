@@ -1,4 +1,5 @@
 @use "../styles/abstracts/" as *;
+@use "../styles/global/paragraphs";
 
 .main-footer {
   background-color: $blackColor;
@@ -39,6 +40,16 @@
 
     &__container {
       width: calc(50%);
+    }
+  }
+
+  &-privacy {
+    width: 100%;
+    text-align: center;
+
+    a {
+      @extend .p-one;
+      color: $whiteColor;
     }
   }
 }

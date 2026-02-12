@@ -3,7 +3,11 @@ import Layout from "../layouts/Layout.astro";
 import PageHeroSmall from "../components/PageHeroSmall/PageHeroSmall.astro";
 
 import { Page_Seo_Query } from "../data/page/queries";
-import { Page_Hero_Small_Query } from "../data/shared/queries";
+import {
+  Page_Hero_Small_Query,
+  Simple_Content_Query,
+} from "../data/shared/queries";
+import SimpleContent from "../components/SimpleContent/SimpleContent.astro";
 
 const { slug } = Astro.props;
 // console.log("slug", slug);
@@ -20,6 +24,7 @@ const response = await fetch(`${import.meta.env.WPGRAPHQL_URL}`, {
                 title
                 defaultTemplateFields {
                     ${Page_Hero_Small_Query}
+                    ${Simple_Content_Query}
                 }
             }
         }
@@ -39,4 +44,5 @@ const {
   metaDescription={page.seoMetaTags.seoMetaInformation.metaDescription}
 >
   <PageHeroSmall data={page.defaultTemplateFields.pageHeroSmall} />
+  <SimpleContent data={page.defaultTemplateFields.simpleContent} />
 </Layout>

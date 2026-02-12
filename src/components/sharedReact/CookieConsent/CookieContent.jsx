@@ -11,14 +11,14 @@ const CookieConsent = () => {
     let d = new Date();
     let oneYear = new Date(d.getFullYear() + 1, d.getMonth(), d.getDate());
     document.cookie =
-      "ahf-cookie-consent=granted; expires=" + oneYear + "; path=/";
+      "gwa-cookie-consent=granted; expires=" + oneYear + "; path=/";
     consentGranted();
   };
 
   const handleDecline = () => {
     setCookies("denied");
     // declined cookie only lasts for the session
-    document.cookie = "ahf-cookie-consent=denied; path=/";
+    document.cookie = "gwa-cookie-consent=denied; path=/";
   };
 
   // this waits to load the cookie banner until the component is mounted
@@ -37,10 +37,10 @@ const CookieConsent = () => {
       >
         <div className="">
           <p className="">
-            We use cookies to analyze our website and make your experience even
-            better. To learn more, see our{" "}
+            We use Google Analytics to understand website usage and improve
+            performance. You can manage your analytics preferences below.{" "}
             <a className="" href="/privacy-policy">
-              Privacy Policy.
+              Learn more in our Privacy Policy & Terms of Use.
             </a>
           </p>
 
@@ -49,7 +49,7 @@ const CookieConsent = () => {
               Accept
             </button>
             <button className="" onClick={handleDecline}>
-              Decline
+              Disable Analytics
             </button>
           </div>
         </div>

@@ -1,0 +1,15 @@
+---
+import Wrapper from "../shared/Wrapper.astro";
+import Wysiwyg from "../shared/Wysiwyg.astro";
+import "./simpleContent.scss";
+
+const { content } = Astro.props.data;
+---
+
+<div class="simple-content">
+  <Wrapper>
+    <Wysiwyg>
+      <div set:html={content} />
+    </Wysiwyg>
+  </Wrapper>
+</div>
