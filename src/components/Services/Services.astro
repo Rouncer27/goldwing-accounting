@@ -4,9 +4,9 @@ import Button from "../shared/Button.astro";
 import Headline from "../shared/Headline.astro";
 import Wrapper from "../shared/Wrapper.astro";
 import "./services.scss";
-import ServiceSlider from "./ServiceSlider/ServiceSlider";
-import TabletSlider from "./ServiceSlider/TabletSlider";
-import MobileSlider from "./ServiceSlider/MobileSlider";
+// import ServiceSlider from "./ServiceSlider/ServiceSlider";
+// import TabletSlider from "./ServiceSlider/TabletSlider";
+// import MobileSlider from "./ServiceSlider/MobileSlider";
 
 import wideBrushSwatch from "../../assets/wide-brush-swatch.png";
 import brushstrokeGreen from "../../assets/brushstroke-green.png";
@@ -39,6 +39,8 @@ if (buttonType?.includes("internal") && buttonLink?.edges?.length) {
 
 const bottomImageSrc = bottomImage?.node?.sourceUrl;
 const bottomImageAlt = bottomImage?.node?.altText || "";
+
+import circleTexture from "../../assets/circle-texture.png";
 ---
 
 <div class="services">
@@ -51,9 +53,34 @@ const bottomImageAlt = bottomImage?.node?.altText || "";
     </div>
   </Wrapper>
   <div class="services-slider-wrap">
-    <ServiceSlider client:only="react" services={services} />
+    <!-- <ServiceSlider client:only="react" services={services} />
     <TabletSlider client:only="react" services={services} />
-    <MobileSlider client:only="react" services={services} />
+    <MobileSlider client:only="react" services={services} /> -->
+    <Wrapper>
+      <div class="services-icons-display">
+        {
+          services.map((service) => {
+            return (
+              <div class="services-icons-display-item">
+                <div class="services-icons-display-item-icon">
+                  <img
+                    src={service.icon.node.sourceUrl}
+                    alt={service.icon.node.altText}
+                  />
+                </div>
+                <div class="services-icons-display-item-title">
+                  <h3 set:html={service.title} />
+                </div>
+                <div class="services-icons-display-item-texture">
+                  <img src={circleTexture.src} alt={service.title} />
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+    </Wrapper>
+
     <div class="services-slider-wrap-brush">
       <img src={angleBrush.src} alt="" />
     </div>
