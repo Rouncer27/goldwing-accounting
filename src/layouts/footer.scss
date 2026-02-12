@@ -42,10 +42,16 @@
       width: calc(50%);
     }
   }
-
+  &-copy,
   &-privacy {
     width: 100%;
     text-align: center;
+
+    p {
+      @extend .p-one;
+      margin: 0;
+      color: $whiteColor;
+    }
 
     a {
       @extend .p-one;
