@@ -101,6 +101,7 @@
         flex-wrap: wrap;
         justify-content: center;
         width: calc(100%);
+        margin-bottom: 1.5rem;
 
         @media (min-width: 768px) {
           width: calc((100% / 3) - 1rem);
@@ -108,9 +109,13 @@
         }
 
         &-number {
-          width: calc(35%);
+          width: calc(20%);
+
+          @media (min-width: 768px) {
+            width: calc(35%);
+          }
           p {
-            @extend .hl-three;
+            @extend .hl-four;
             font-weight: 600;
             text-transform: uppercase;
             color: $whiteColor;
@@ -118,8 +123,12 @@
         }
 
         &-content {
-          width: calc(65% - 1rem);
+          width: calc(80% - 1rem);
           margin-left: 1rem;
+
+          @media (min-width: 768px) {
+            width: calc(65% - 1rem);
+          }
 
           p {
             @extend .p-two;
