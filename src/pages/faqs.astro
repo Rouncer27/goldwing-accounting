@@ -32,13 +32,34 @@ const {
     page: { seoMetaTags, faqsPage },
   },
 } = await response.json();
+
+// FAQPage schema so questions can appear as rich results
+const stripTags = (html = "") => html.replace(/<[^>]*>/g, "").trim();
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: (faqsPage.faqs?.sections ?? [])
+    .flatMap((section) => section.category ?? [])
+    .flatMap((cat) => cat.questions ?? [])
+    .map((quest) => ({
+      "@type": "Question",
+      name: stripTags(quest.question),
+      acceptedAnswer: { "@type": "Answer", text: quest.answer },
+    })),
+};
 ---
 
 <Layout
-  metaImg={seoMetaTags.seoMetaInformation.metaImage.sourceUrl}
+  metaImg={seoMetaTags.seoMetaInformation.metaImage?.node?.sourceUrl}
   metaTitle={seoMetaTags.seoMetaInformation.metaTitle}
   metaDescription={seoMetaTags.seoMetaInformation.metaDescription}
 >
+  <script
+    slot="head"
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify(faqSchema)}
+  />
   <PageHeroSmall data={faqsPage.pageHeroSmall} />
   <FaqsList data={faqsPage.faqs} />
 </Layout>

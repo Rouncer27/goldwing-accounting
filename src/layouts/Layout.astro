@@ -17,50 +17,40 @@ const {
   metaImg = null,
   metaTitle = null,
   metaDescription = null,
+  ogType = "website",
 } = Astro.props;
 // 2️⃣ SEO fallback data
 const title = metaTitle ? metaTitle : baseData.title;
 const description = metaDescription ? metaDescription : baseData.description;
 const imgSrc = metaImg ? metaImg : baseData.siteImg;
 const baseUrl = Astro.url ? Astro.url : baseData.url;
-
-// 3️⃣ Schema.org data (Organization)
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: baseData.organizationName || baseData.title,
-  url: baseData.url,
-  logo: baseData.logoUrl, // 👈 Store this in baseData.js for reusability
-  sameAs: baseData.socialProfiles || [], // optional: Twitter, Facebook, etc.
-};
-const jsonLd = JSON.stringify(schema);
+// Organization schema is output by MainLogo (it has the real logo from WP)
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en-CA">
   <head>
     <meta charset="UTF-8" />
     <meta name="HandheldFriendly" content="true" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="generator" content={Astro.generator} />
 
     <!-- SEO -->
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="image" content={imgSrc} />
     <link rel="canonical" href={baseUrl} />
     <!-- <link rel="sitemap" href="/sitemap-index.xml" /> -->
 
     <!-- OpenGraph Tags -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:url" content={baseUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={imgSrc} />
     <meta property="og:image:alt" content={description} />
-    <meta property="og:site_name" content={title} />
-    <meta property="og:locale" content={`en_US`} />
+    <meta property="og:site_name" content={baseData.title} />
+    <meta property="og:locale" content="en_CA" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -69,7 +59,6 @@ const jsonLd = JSON.stringify(schema);
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imgSrc} />
     <meta name="twitter:image:alt" content={description} />
-    <meta name="twitter:creator" content={"Goldwing Accounting"} />
 
     <!-- Google tag (gtag.js) -->
     <script
@@ -147,7 +136,7 @@ const jsonLd = JSON.stringify(schema);
       }
     </script>
 
-    <script type="application/ld+json" is:inline set:html={jsonLd} />
+    <slot name="head" />
   </head>
   <body>
     <Header />

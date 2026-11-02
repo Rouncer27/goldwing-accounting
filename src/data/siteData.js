@@ -3,9 +3,9 @@ import defaultSrc from "../../public/meta-default-image.jpg";
 export const baseData = {
   title: "Goldwing Accounting",
   organizationName: "Goldwing Accounting",
-  description: "Goldwing Accountingn",
-  siteImg: `https://goldwingaccounting.netlify.app/${defaultSrc.src}`,
+  description: "Goldwing Accounting",
+  siteImg: new URL(defaultSrc.src, "https://goldwingac.com").href,
   logoUrl: "",
-  url: "https://goldwingaccounting.netlify.app/",
+  url: "https://goldwingac.com/",
   socialProfiles: [],
 };

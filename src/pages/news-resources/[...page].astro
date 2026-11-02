@@ -4,6 +4,7 @@ import type { GetStaticPaths } from "astro";
 import Layout from "../../layouts/Layout.astro";
 import PageHeroSmall from "../../components/PageHeroSmall/PageHeroSmall.astro";
 import PostCards from "../../components/PostCards/PostCards.astro";
+import Button from "../../components/shared/Button.astro";
 
 import { Page_Seo_Query } from "../../data/page/queries";
 import { Page_Hero_Small_Query } from "../../data/shared/queries";
@@ -77,13 +78,39 @@ const {
   page,
   page: { data: allPosts },
 } = Astro.props;
+
+// Give paginated pages unique titles so they aren't flagged as duplicates
+const baseTitle = seoMetaTags.seoMetaInformation.metaTitle;
+const metaTitle =
+  page.currentPage > 1 && baseTitle
+    ? `${baseTitle} - Page ${page.currentPage}`
+    : baseTitle;
 ---
 
 <Layout
-  metaImg={seoMetaTags.seoMetaInformation.metaImage.sourceUrl}
-  metaTitle={seoMetaTags.seoMetaInformation.metaTitle}
+  metaImg={seoMetaTags.seoMetaInformation.metaImage?.node?.sourceUrl}
+  metaTitle={metaTitle}
   metaDescription={seoMetaTags.seoMetaInformation.metaDescription}
 >
   <PageHeroSmall data={newsResourcesPage.pageHeroSmall} />
   <PostCards allPosts={allPosts} />
+  {
+    page.lastPage > 1 && (
+      <nav class="articles-pagination" aria-label="News & Resources pages">
+        {page.url.prev && (
+          <Button ele="a" btnstyle="two" href={page.url.prev} rel="prev">
+            Newer posts
+          </Button>
+        )}
+        <span>
+          Page {page.currentPage} of {page.lastPage}
+        </span>
+        {page.url.next && (
+          <Button ele="a" btnstyle="two" href={page.url.next} rel="next">
+            Older posts
+          </Button>
+        )}
+      </nav>
+    )
+  }
 </Layout>

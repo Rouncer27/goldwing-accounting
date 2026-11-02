@@ -91,13 +91,33 @@ const {
     post: { seoMetaTags },
   },
 } = await response.json();
+
+const meta = seoMetaTags.seoMetaInformation;
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: post.title,
+  description: meta.metaDescription || undefined,
+  image: post.postFields.featuredImage?.node?.sourceUrl || undefined,
+  datePublished: post.date,
+  mainEntityOfPage: Astro.url.href,
+  author: { "@type": "Organization", name: "Goldwing Accounting" },
+  publisher: { "@type": "Organization", name: "Goldwing Accounting" },
+};
 ---
 
 <Layout
-  metaImg={seoMetaTags.seoMetaInformation.metaImage.sourceUrl}
+  metaImg={seoMetaTags.seoMetaInformation.metaImage?.node?.sourceUrl}
   metaTitle={seoMetaTags.seoMetaInformation.metaTitle}
   metaDescription={seoMetaTags.seoMetaInformation.metaDescription}
+  ogType="article"
 >
+  <script
+    slot="head"
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify(articleSchema)}
+  />
   <PageHeroSmall data={{ image: defaultPageHero, title: "News & Resources" }} />
   <ArticleIntro post={post} />
   <ArticleWysiwyg post={post} />

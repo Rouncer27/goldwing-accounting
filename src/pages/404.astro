@@ -27,7 +27,8 @@ const {
 } = await response.json();
 ---
 
-<Layout>
+<Layout metaTitle="Page Not Found | Goldwing Accounting">
+  <meta slot="head" name="robots" content="noindex" />
   <PageHeroSmall data={{ image: defaultPageHero, title: "Page Not Found" }} />
   <NotFound />
 </Layout>
